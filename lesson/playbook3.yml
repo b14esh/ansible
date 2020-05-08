@@ -1,0 +1,42 @@
+---
+- name: My super Playbook
+  hosts: all
+  become: yes
+
+  vars:
+     message1: privet
+     message2: word
+     secret  : LKKDKDKDKDLSDKLSKD
+  
+  tasks:
+  
+  - name: Print Sectret variable
+    debug:
+      var: secret
+
+  - debug:
+      msg: "Sekretnoe slovo {{ secret }}"
+
+  - debug: 
+      msg: "Vladelec etogo servera --> {{ owner }} <--"
+
+  - set_fact: full_message=" {{ message1 }} {{ message2 }} from {{ owner }}"
+  
+  - debug:
+      var: full_message
+
+  - debug:
+      var: ansible_distribution
+
+  - debug: 
+      var: ansible_all_ipv4_addresses
+
+  - shell: uptime
+    register: results
+
+  - debug: 
+      var: results
+
+  - debug:
+      var: results.stdout
+...

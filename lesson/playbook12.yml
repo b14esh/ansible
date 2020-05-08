@@ -1,0 +1,29 @@
+---
+- name: My playbook create file
+  hosts: all 
+  become: yes
+
+  vars:
+   mytext: "Privet ot b14esh"
+
+  tasks:
+  - name: Test ping 
+    ping:
+
+  - name: Create File file1.txt
+    copy:
+      dest: /home/file1.txt
+      content: |
+         This is file1.txt
+         On ohhh {{ mytext }}
+    delegate_to: linux1
+
+  - name: Create file file2.txt
+    copy:
+     dest: /home/file2.txt
+     content: | 
+        This is File2
+        Mytext {{ mytext }}
+        lol lol lol lol lol
+
+...

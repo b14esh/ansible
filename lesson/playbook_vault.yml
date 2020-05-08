@@ -1,0 +1,28 @@
+---
+- name: vault playbook
+  hosts: all
+  become: yes
+  
+  vars:
+    admin_password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          39633633373832373034633265323832353636363733643431636535346535643532643439386435
+          6638306639306430363664633036386332313133373231390a386338373232373765353964373634
+          35363336353962646137663631366265336362323431393263356436313935373735366465363936
+          3265633730376163390a376564336565316330393261373931356339656164366162633839666463
+          6337
+
+  tasks:
+  - name: Install package tree
+    yum: name=tree state=present
+
+  - name: Create Config File
+    copy:
+      dest: "/home/secret/myconfig.conf"
+      content: |
+         port = 9092
+         log = 7days
+         home =  /home/secret/
+         user = admin
+         password = {{ admin_password }} 
+...

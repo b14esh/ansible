@@ -1,0 +1,22 @@
+---
+- name: Test ansible  
+  hosts: all
+  any_errors_fatal : true
+  become: yes
+
+  tasks:
+  - name: Tasks number1
+    yum: name=treeee state=present
+    ignore_errors: yes
+
+  - name: Tasks number2
+    shell: cat /home/secret/file71.txt
+    register: results
+
+  - debug:
+      var: results
+
+  - name: Tasks number3
+    shell: echo Privet Man!
+
+...

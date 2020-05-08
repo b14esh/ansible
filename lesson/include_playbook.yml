@@ -1,0 +1,16 @@
+---
+- name: My TEST Playbook
+  hosts: all
+  become: yes
+
+  vars:
+   mytext: "Privet MEN"
+
+  tasks:
+  - name: Ping test
+    ping:
+
+  - include: create_folder.yml
+  - include: create_files.yml mytext="Hello from Mosckow"
+
+...
