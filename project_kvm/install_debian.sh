@@ -1,0 +1,2 @@
+#!/bin/bash
+virt-install  --name ИМЯ_ХОСТА -r 1024  --disk path=/ПУТЬ_ДО_ДИСКА_ХОСТА/ИМЯ_ХОСТА.qcow2,size=8  --vcpus 2  --location=http://ftp.ru.debian.org/debian/dists/stable/main/installer-amd64/  --initrd-inject=/ПУТЬ_ДО_ФАЙЛА/preseed.cfg  --extra-args="auto keyboard-configuration/xkb-keymap=en"  --vnc   --noautoconsole   --os-type Debian10  --accelerate  --network bridge=br0,model=virtio  --hvm

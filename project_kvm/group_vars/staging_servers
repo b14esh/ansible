@@ -1,0 +1,4 @@
+---
+ansible_user                : b14esh
+ansible_ssh_private_key_file: /home/b14esh/.ssh/id_rsa
+...
