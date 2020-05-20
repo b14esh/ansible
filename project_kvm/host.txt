@@ -1,23 +1,23 @@
 [staging_servers]
-linux2 ansible_host=10.0.0.3 owner=xuy
-linux3 ansible_host=10.0.0.4 owner=xuy
-linux4 ansible_host=10.0.0.5 owner=xuy
-linux5 ansible_host=10.0.0.6 owner=xuy
-linux6 ansible_host=10.0.0.7 owner=xuy
-linux7 ansible_host=10.0.0.8 owner=xuy
-linux8 ansible_host=10.0.0.9 owner=xuy
-linux9 ansible_host=10.0.0.10 owner=xuy
-linux10 ansible_host=10.0.0.11 owner=xuy
-linux11 ansible_host=10.0.0.12 owner=xuy
-linux12 ansible_host=10.0.0.13 owner=xuy
-linux13 ansible_host=10.0.0.14 owner=xuy
-linux14 ansible_host=10.0.0.15 owner=xuy
-linux15 ansible_host=10.0.0.16 owner=xuy
-linux16 ansible_host=10.0.0.17 owner=xuy
-linux17 ansible_host=10.0.0.18 owner=xuy
-linux18 ansible_host=10.0.0.19 owner=xuy
-linux19 ansible_host=10.0.0.20 owner=xuy
-linux20 ansible_host=10.0.0.21 owner=xuy
+linux2 ansible_host=10.0.0.2 owner=xuy
+linux3 ansible_host=10.0.0.3 owner=xuy
+linux4 ansible_host=10.0.0.4 owner=xuy
+linux5 ansible_host=10.0.0.5 owner=xuy
+linux6 ansible_host=10.0.0.6 owner=xuy
+linux7 ansible_host=10.0.0.7 owner=xuy
+linux8 ansible_host=10.0.0.8 owner=xuy
+linux9 ansible_host=10.0.0.9 owner=xuy
+linux10 ansible_host=10.0.0.10 owner=xuy
+linux11 ansible_host=10.0.0.11 owner=xuy
+linux12 ansible_host=10.0.0.12 owner=xuy
+linux13 ansible_host=10.0.0.13 owner=xuy
+linux14 ansible_host=10.0.0.14 owner=xuy
+linux15 ansible_host=10.0.0.15 owner=xuy
+linux16 ansible_host=10.0.0.16 owner=xuy
+linux17 ansible_host=10.0.0.17 owner=xuy
+linux18 ansible_host=10.0.0.18 owner=xuy
+linux19 ansible_host=10.0.0.19 owner=xuy
+linux20 ansible_host=10.0.0.20 owner=xuy
 linux21 ansible_host=10.0.0.21 owner=xuy
 
 

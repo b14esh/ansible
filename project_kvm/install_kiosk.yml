@@ -1,0 +1,19 @@
+- name: Test connection to my servers
+  hosts: all
+  become: yes
+ 
+  tasks:
+   - name: Ping my servers
+     ping:
+
+   - name: install xorg
+     apt: name=xorg state=present
+
+   - name: install  chromium 
+     apt: name=chromium state=present
+
+   - name: install openbox 
+     apt: name=openbox state=present
+
+   - name: install lightdm
+     apt: name=lightdm state=present
