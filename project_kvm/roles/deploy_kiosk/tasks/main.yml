@@ -18,7 +18,7 @@
     name:     kiosk-user
     groups:   kiosk-user
     home:     /home/kiosk-user/
-    shell:    /bin/bash append=yes
+    shell:    /bin/bash
     password: ""
     state:    present
 
@@ -42,10 +42,17 @@
 
 - name: Change file ownership, group and permissions for kiosk-user
   file:
-    path: /home/kiosk-user/.config/openbox
+    path: /home/kiosk-user/.config/
     owner: kiosk-user
     group: kiosk-user
-    mode: '0644'
+    mode: '0755'
+
+- name: Change file ownership, group and permissions for kiosk-user
+  file:
+    path: /home/kiosk-user/.config/openbox/autostart
+    owner: kiosk-user
+    group: kiosk-user
+    mode: '0755'
 
 - name: reboot servers kiosk
   shell: sleep 4 && reboot now
