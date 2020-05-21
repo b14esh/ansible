@@ -1,0 +1,5 @@
+---
+# defaults file for deploy_kiosk
+      destin_folder1: /etc/lightdm
+      destin_folder2: /home/kiosk-user/.config/openbox
+

@@ -1,0 +1,54 @@
+---
+# tasks file for deploy_kiosk
+- name: install xorg
+  apt: name=xorg state=present
+
+- name: install  chromium
+  apt: name=chromium state=present
+
+- name: install openbox
+  apt: name=openbox state=present
+
+- name: install lightdm
+  apt: name=lightdm state=present
+
+
+- name: add user kiosk-user
+  user: 
+    name:     kiosk-user
+    groups:   kiosk-user
+    home:     /home/kiosk-user/
+    shell:    /bin/bash append=yes
+    password: ""
+    state:    present
+
+- name: Create folder openbox from user kiosk-user
+  file:
+     path:  /home/kiosk-user/.config/openbox
+     state: directory
+     mode:  0755
+     owner: kiosk-user
+     group: kiosk-user
+
+- name: Copy files  to kiosk lightdm
+  copy: src={{ item }} dest={{ destin_folder1 }} mode=0555
+  loop:
+    - "lightdm.conf"
+
+- name: Copy files  to kiosk autostart 
+  copy: src={{ item }} dest={{ destin_folder2 }} mode=0555
+  loop:
+    - "autostart"
+
+- name: Change file ownership, group and permissions for kiosk-user
+  file:
+    path: /home/kiosk-user/.config/openbox
+    owner: kiosk-user
+    group: kiosk-user
+    mode: '0644'
+
+- name: reboot servers kiosk
+  shell: sleep 4 && reboot now
+  async: 1
+  poll: 0
+
