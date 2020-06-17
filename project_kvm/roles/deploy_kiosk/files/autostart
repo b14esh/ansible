@@ -1,9 +1,43 @@
+#chromium \
+#    --no-first-run \
+#    --disable \
+#    --disable-translate \
+#    --disable-infobars \
+#    --disable-suggestions-service \
+#    --disable-save-password-bubble \
+#    --start-maximized \
+#    --kiosk "https://www.twitch.tv/runmeb" &
+
+#chromium \
+#    --no-first-run \
+#    --disable \
+#    --disable-translate \
+#    --disable-infobars \
+#    --disable-suggestions-service \
+#    --new-window  "https://www.twitch.tv/balugame" &
+
 chromium \
     --no-first-run \
     --disable \
     --disable-translate \
     --disable-infobars \
     --disable-suggestions-service \
-    --disable-save-password-bubble \
-    --start-maximized \
-    --kiosk "https://www.google.com" &
+    --new-window  "https://b14esh.com" &
+
+#chromium \
+#    --no-first-run \
+#    --disable \
+#    --disable-translate \
+#    --disable-infobars \
+#    --disable-suggestions-service \
+#    --new-window "https://www.twitch.tv/runmeb" &
+
+#chromium \
+#    --no-first-run \
+#    --disable \
+#    --disable-translate \
+#    --disable-infobars \
+#    --disable-suggestions-service \
+#    --new-window "https://www.youtube.com/channel/UCX4IZ4yvM2P9wA4CLyg_M2g" &
+
+
