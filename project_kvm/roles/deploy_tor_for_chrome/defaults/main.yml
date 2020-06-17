@@ -1,0 +1,5 @@
+---
+# defaults file for deploy_kiosk
+      destin_folder1: /usr/bin
+      
+

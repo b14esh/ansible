@@ -1,0 +1,28 @@
+---
+# tasks file for deploy_tor
+- name: install tor
+  apt: name=tor state=present
+
+- stat:
+   path: /usr/bin/chromium_src
+  register: results
+
+
+- name: Copy files chromium 
+  copy: src=/usr/bin/chromium  dest=/usr/bin/chromium_src  mode=0755
+  when: results.stat.exists == false 
+ 
+- name: Copy files to kiosk lightdm
+  copy: src={{ item }} dest={{ destin_folder1 }} mode=0755
+  loop:
+    - "chromium"
+  when: results.stat.exists == true 
+
+#- debug:
+#    var: results.stat.exists
+
+- name: reboot servers kiosk
+  shell: sleep 4 && reboot now
+  async: 1
+  poll: 0
+

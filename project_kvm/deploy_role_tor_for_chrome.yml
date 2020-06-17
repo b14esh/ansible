@@ -1,0 +1,10 @@
+---
+- name: Install Apache and Upload my Web Page
+  hosts: all
+  become: yes
+ 
+  roles:
+    - { role: deploy_tor_for_chrome, when: ansible_system == 'Linux' }
+   
+ 
+...
