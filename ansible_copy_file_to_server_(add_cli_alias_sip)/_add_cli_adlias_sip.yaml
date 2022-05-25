@@ -1,0 +1,16 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: false
+  vars:
+       destin_file_cli: /etc/asterisk/cli_aliases.conf
+       source_file_cli: ./cli_aliases.conf
+ 
+  tasks:
+  - name: Copy file cli to Servers
+    copy: src={{ source_file_cli }} dest={{ destin_file_cli }} mode=0664 owner=root group=asterisk backup=yes 
+
+  - name: asterisk reload alias config
+    shell: asterisk -rx 'config reload /etc/asterisk/cli_aliases.conf'
+
+...
