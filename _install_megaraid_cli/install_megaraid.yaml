@@ -1,0 +1,32 @@
+---
+- hosts: all
+  become: yes
+  vars:
+       source_file_HINT_megaraid: ./HINT_megaraid
+       destin_file_HINT_megaraid: /root/HINT_megaraid
+       source_file_deb_megaraid: ./megacli_8.07.14-2_all.deb
+       destin_file_deb_megaraid: /opt/megacli_8.07.14-2_all.deb
+         
+ 
+ 
+  tasks:
+  - name: Cheack and Print Linux Version
+    debug: var=ansible_os_family
+ 
+  - name: Install "libncurses5" package
+    apt:
+      name: libncurses5
+      state: present  
+    when: ansible_os_family == "Debian"    
+
+  - name: Copy file "HINT_megaraid" to Servers
+    copy: src={{ source_file_HINT_megaraid }} dest={{ destin_file_HINT_megaraid }} mode=0400  
+
+  - name: Copy file "megacli_8.07.14-2_all.deb" to Servers
+    copy: src={{ source_file_deb_megaraid }} dest={{ destin_file_deb_megaraid }} mode=0400
+
+  - name: Install "megacli_8.07.14-2_all.deb" package
+    apt:
+     deb: /opt/megacli_8.07.14-2_all.deb 
+    when: ansible_os_family == "Debian"    
+

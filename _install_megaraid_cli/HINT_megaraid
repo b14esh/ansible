@@ -1,0 +1,4 @@
+/opt/MegaRAID/MegaCli/MegaCli64 -AdpAllinfo -aALL
+/opt/MegaRAID/MegaCli/MegaCli64 -LDInfo -Lall -aALL
+/opt/MegaRAID/MegaCli/MegaCli64 -PDList -aALL
+
