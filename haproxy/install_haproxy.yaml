@@ -1,0 +1,26 @@
+---
+- hosts: all
+  become: yes
+  
+  tasks:
+  - name: Cheack and Print Linux Version
+    debug: var=ansible_os_family
+
+  - name: Install "haproxy from repository" package
+    apt:
+     name: haproxy
+     state: present
+
+  - name: Add config haproxy
+    template:
+       src: ./haproxy.conf.j2
+       dest: /etc/haproxy/haproxy.cfg
+
+  - name: Restart haproxy
+    service:
+        name: haproxy
+        state: restarted
+
+ 
+
+          
