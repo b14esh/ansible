@@ -1,27 +1,22 @@
 ---
 - hosts: all
   become: yes
-  vars:
   
   tasks:
   - name: Cheack and Print Linux Version
     debug: var=ansible_os_family
 
- - name: Install "zabbix-agent from repository" package
+  - name: Install "zabbix-agent from repository" package
     apt:
-      name: zabbix-agent 
-      state: present
+     name: zabbix-agent 
+     state: present
 
   - name: Add config zabbix agent
     template:
        src: ./zabbix-agent.conf.j2
        dest: /etc/zabbix/zabbix_agentd.conf
 
-   - name: Restart zabbix-agent
+  - name: Restart zabbix-agent
     service:
         name: zabbix-agent
         state: restarted
-
- 
-
-          
