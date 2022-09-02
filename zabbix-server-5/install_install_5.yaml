@@ -1,0 +1,171 @@
+---
+- name: Install Zabbix vesrion 5 on server Debian 10
+  hosts: all
+  become: yes
+  vars:
+     mysql_root_password: "password"
+     ansible_fqdn: zabbix5
+     destin_file_cnf: /root/.my.cnf
+     source_file_cnf: ./.my.cnf
+     zabbix_user: "zabbix"
+     zabbix_password: "zabbix"
+     zabbix_db: "zabbix"
+     zabbix_host: "localhost"
+     zabbix_priv: "{{ zabbix_db }}.*:ALL"
+     destin_conf: /usr/share/zabbix/conf/zabbix.conf.php
+     source_conf: ./zabbix.conf.php        
+
+  tasks:
+  - name: Update apt repo and cache on all Debian/Ubuntu boxes
+    apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+
+  - name: Upgrade all packages on servers
+    apt: upgrade=dist force_apt_get=yes
+
+# download and install
+#  - name: Check that the zabbix-release exists
+#    stat:
+#       path: /root/zabbix-release_5.0-1+buster_all.deb
+#    register: fileup
+#
+#  - name: Download zabbix-release
+#    get_url:
+#       url: https://repo.zabbix.com/zabbix/5.0/debian/pool/main/z/zabbix-release/zabbix-release_5.0-1+buster_all.deb
+#       dest: /root/zabbix-release_5.0-1+buster_all.deb
+#       mode: '0440'
+#    when: fileup.stat.exists == False
+#
+#  - name: Install a .deb package
+#    apt:
+#      deb: /root/zabbix-release_5.0-1+buster_all.deb
+#    when: fileup.stat.exists
+
+# install from internet 
+  - name: Install a .deb package from the internet
+    apt:
+      deb: https://repo.zabbix.com/zabbix/5.0/debian/pool/main/z/zabbix-release/zabbix-release_5.0-1+buster_all.deb 
+
+
+  - name: Run the equivalent of "apt-get update" as a separate step
+    apt:
+      update_cache: yes
+      cache_valid_time: 3600  
+
+  - name: Install a list of packages
+    apt:
+      pkg:
+        - zabbix-server-mysql
+        - zabbix-frontend-php
+        - zabbix-apache-conf
+        - zabbix-agent
+        - mariadb-server
+        - python-apt
+        - python-pymysql
+        - python3-apt
+        - python3 
+        - python3-pip 
+        - python3-setuptools
+        - python3-pymysql 
+        - zabbix-agent  
+      state: latest
+      update_cache: True    
+
+  - name: Copy file cnf to Servers
+    copy: src={{ source_file_cnf }} dest={{ destin_file_cnf }} mode=0600 owner=root group=root backup=yes 
+
+  - name: Edit line password
+    lineinfile:
+      path: /root/.my.cnf
+      state: present
+      regexp: '^password='
+      line: 'password="{{ mysql_root_password }}"'
+
+
+  - name: Remove the test database
+    mysql_db:
+      login_unix_socket: /var/run/mysqld/mysqld.sock
+      name: test
+      state: absent
+
+  - name: Remove anonymous user
+    mysql_user:
+      login_unix_socket: /var/run/mysqld/mysqld.sock
+      name: ''
+      state: absent
+  
+  - name: Sets the root password 
+    mysql_user:
+       login_unix_socket: /var/run/mysqld/mysqld.sock
+       user: root 
+       password: "{{ mysql_root_password }}" 
+       host: localhost  
+
+  - name: "Create new databases with names {{ zabbix_user }}"
+    mysql_db:
+      login_unix_socket: /var/run/mysqld/mysqld.sock
+      name: "{{ zabbix_user }}"
+      encoding: utf8
+      collation: utf8_bin
+      state: present
+  
+  - name: "Add user and add  privilege for {{ zabbix_db }}"
+    mysql_user:
+      login_unix_socket: /var/run/mysqld/mysqld.sock
+      login_host: "localhost"
+      name: "{{ zabbix_db }}"
+      password: "{{ zabbix_password }}"
+      host: "localhost"
+      priv: "{{ zabbix_priv }}"
+      state: present
+      append_privs: yes
+
+      #  - name: Unarhive file
+      #unarchive:
+      #src:  /usr/share/doc/zabbix-server-mysql/create.sql.gz
+      #dest: /usr/share/doc/zabbix-server-mysql
+      #remote_src: yes
+
+
+      # NOT WORK zcat pipe mysql  
+      #  - name: "I'm tired, I'm  try,  use shell create db zabbix"
+      #    shell: zcat /usr/share/doc/zabbix-server-mysql/create.sql.gz | mysql -h {{ zabbix_host }} -u {{ zabbix_user }} --password={{ zabbix_password }} {{ zabbix_db }}
+
+      # NOT WOR  import to mysql NOt work unargive
+      #  - name: "Zcat unpack"
+      #    shell: zcat /usr/share/doc/zabbix-server-mysql/create.sql.gz > /usr/share/doc/zabbix-server-mysql/create.sql
+
+  - name: Importing databases
+    mysql_db:
+      name: "{{ zabbix_db }}"
+      login_user: "{{zabbix_user}}"
+      login_host: localhost
+      login_password: "{{ zabbix_password }}"
+      config_file: no
+      state: import
+      encoding: utf8
+      collation: utf8_bin
+      target: "/usr/share/doc/zabbix-server-mysql/create.sql.gz"
+
+
+  - name: Edit line db_password for zabbix-server
+    lineinfile:
+      path: /etc/zabbix/zabbix_server.conf
+      state: present
+      regexp: '^DBPassword='
+      line: 'DBPassword={{ zabbix_password }}'
+
+  - name: Edit line time zone
+    lineinfile:
+      path: /etc/zabbix/apache.conf
+      state: present
+      regexp: '^php_value date.timezone Europe/Riga'
+      line: 'php_value date.timezone Europe/Moscow'
+
+  - name: Copy file conf php to server zabbix
+    copy: src={{ source_conf }} dest={{ destin_conf }} mode=0644 owner=root group=root backup=yes 
+
+  - name: Service zabbix restart and add autostart
+    shell: systemctl restart zabbix-server zabbix-agent apache2 &&  systemctl enable zabbix-server zabbix-agent apache2   
+
+
+...
