@@ -60,21 +60,21 @@
     get_url:
        url: https://docs.faucet.nz/en/latest/_static/grafana-dashboards/faucet_instrumentation.json
        dest: /etc/grafana/provisioning/dashboards/faucet_instrumentation.json
-       mode: '0600'
+       mode: '0644'
 
     
   - name: Download gpg key for grafana
     get_url:
        url: https://docs.faucet.nz/en/latest/_static/grafana-dashboards/faucet_inventory.json
        dest: /etc/grafana/provisioning/dashboards/faucet_inventory.json
-       mode: '0600'
+       mode: '0644'
 
      
   - name: Download gpg key for grafana
     get_url:
        url: https://docs.faucet.nz/en/latest/_static/grafana-dashboards/faucet_port_statistics.json
        dest: /etc/grafana/provisioning/dashboards/faucet_port_statistics.json
-       mode: '0600'
+       mode: '0644'
 
   - name: Copy file grafana to Server
     copy: src={{ source_file_grafana }} dest={{ destin_file_grafana }} mode=0600 owner=root group=root backup=yes 
