@@ -35,8 +35,8 @@
         url: https://packagecloud.io/faucetsdn/faucet/gpgkey
         dest: /etc/apt/trusted.gpg.d/faucet.asc
  
-   - name: somerepo | apt source
-     ansible.builtin.apt_repository:
+  - name: faucet | apt source
+    ansible.builtin.apt_repository:
         repo: "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/faucet.asc] deb https://packagecloud.io/faucetsdn/faucet/debian/ bullseye main"
         state: present
  
