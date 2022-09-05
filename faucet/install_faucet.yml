@@ -40,7 +40,8 @@
         - faucet
         - gauge
       state: latest
- 
+      update_cache: True
+    
   - name: Edit line config promiteus
     lineinfile:
       path: /etc/default/prometheus
