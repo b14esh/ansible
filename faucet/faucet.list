@@ -1,0 +1,2 @@
+#echo "deb https://packagecloud.io/faucetsdn/faucet/$(lsb_release -si | awk '{print tolower($0)}')/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/faucet.list
+deb https://packagecloud.io/faucetsdn/faucet/debian/ bullseye main

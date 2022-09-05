@@ -1,0 +1,100 @@
+---
+- name: Install faucet for debian 11 
+  hosts: all
+  become: yes
+  vars:
+     source_file_faucet: ./faucet.list
+     destin_file_faucet: /etc/apt/sources.list.d/faucet.list
+     source_file_grafana: ./dashboard.yml
+     destin_file_grafana: /etc/grafana/provisioning/dashboards/dashboard.yml
+     
+  tasks:
+  - name: Update apt repo and cache on all Debian/Ubuntu boxes
+    apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+
+  - name: Upgrade all packages on servers
+    apt: upgrade=dist force_apt_get=yes
+
+  - name: Install a list of packages
+    apt:
+      pkg:
+        - curl
+        - gnupg
+        - apt-transport-https
+        - lsb-release
+      state: latest
+
+  - name: Copy file apt list faucet to Server
+    copy: src={{ source_file_faucet }} dest={{ destin_file_faucet }} mode=0600 owner=root group=root backup=no 
+
+  - name: Download gpg key for faucet
+    get_url:
+       url: https://packagecloud.io/faucetsdn/faucet/gpgkey
+       dest: /etc/apt/trusted.gpg.d/faucet.asc
+       mode: '0600'
+ 
+  - name: Install a list of packages
+    apt:
+      pkg:
+        - faucet-all-in-one
+        - faucet
+        - gauge
+      state: latest
+ 
+  - name: Edit line config promiteus
+    lineinfile:
+      path: /etc/default/prometheus
+      state: present
+      regexp: '^ARGS='
+      line: 'ARGS="--config.file=/etc/faucet/prometheus/prometheus.yml"'
+    notify: Restart promiteus
+ 
+  handlers:
+  - name: Restart promiteus
+    service: name=prometheus.service state=restarted
+    
+
+
+  - name: Download gpg key for grafana
+    get_url:
+       url: https://docs.faucet.nz/en/latest/_static/grafana-dashboards/faucet_instrumentation.json
+       dest: /etc/grafana/provisioning/dashboards/faucet_instrumentation.json
+       mode: '0600'
+
+    
+  - name: Download gpg key for grafana
+    get_url:
+       url: https://docs.faucet.nz/en/latest/_static/grafana-dashboards/faucet_inventory.json
+       dest: /etc/grafana/provisioning/dashboards/faucet_inventory.json
+       mode: '0600'
+
+     
+  - name: Download gpg key for grafana
+    get_url:
+       url: https://docs.faucet.nz/en/latest/_static/grafana-dashboards/faucet_port_statistics.json
+       dest: /etc/grafana/provisioning/dashboards/faucet_port_statistics.json
+       mode: '0600'
+
+  - name: Copy file grafana to Server
+    copy: src={{ source_file_grafana }} dest={{ destin_file_grafana }} mode=0600 owner=root group=root backup=yes 
+
+
+  - name: Restart service cron on centos, in all cases, also issue daemon-reload to pick up config changes
+    ansible.builtin.systemd:
+      state: restarted
+      daemon_reload: yes
+      name: crond
+      
+  - name: Enable service grafana-server and ensure it is not masked
+    ansible.builtin.systemd:
+      name: grafana-server
+      enabled: yes
+      masked: no
+    
+ 
+  - name: Enable a timer unit for grafana-server
+    ansible.builtin.systemd:
+      name: grafana-server
+      state: started
+      enabled: yes   
+      
