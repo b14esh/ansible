@@ -27,11 +27,18 @@
   - name: Copy file apt list faucet to Server
     copy: src={{ source_file_faucet }} dest={{ destin_file_faucet }} mode=0600 owner=root group=root backup=no 
 
-  - name: Download gpg key for faucet
-    get_url:
-       url: https://packagecloud.io/faucetsdn/faucet/gpgkey
-       dest: /etc/apt/trusted.gpg.d/faucet.asc
-       mode: '0644'
+
+  - name: One way to avoid apt_key once it is removed from your distro
+    block:
+      - name: faucet |no apt key
+        ansible.builtin.get_url:
+        url: https://packagecloud.io/faucetsdn/faucet/gpgkey
+        dest: /etc/apt/trusted.gpg.d/faucet.asc
+ 
+   - name: somerepo | apt source
+     ansible.builtin.apt_repository:
+        repo: "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/faucet.asc] deb https://packagecloud.io/faucetsdn/faucet/debian/ bullseye main"
+        state: present
  
   - name: Install a list of packages
     apt:
@@ -56,21 +63,21 @@
     
 
 
-  - name: Download gpg key for grafana
+  - name: Download dashboard  for grafana
     get_url:
        url: https://docs.faucet.nz/en/latest/_static/grafana-dashboards/faucet_instrumentation.json
        dest: /etc/grafana/provisioning/dashboards/faucet_instrumentation.json
        mode: '0644'
 
     
-  - name: Download gpg key for grafana
+  - name: Download dashbord for grafana
     get_url:
        url: https://docs.faucet.nz/en/latest/_static/grafana-dashboards/faucet_inventory.json
        dest: /etc/grafana/provisioning/dashboards/faucet_inventory.json
        mode: '0644'
 
      
-  - name: Download gpg key for grafana
+  - name: Downloaddashboard for grafana
     get_url:
        url: https://docs.faucet.nz/en/latest/_static/grafana-dashboards/faucet_port_statistics.json
        dest: /etc/grafana/provisioning/dashboards/faucet_port_statistics.json
