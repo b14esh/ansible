@@ -1,5 +1,5 @@
 ---
-- name: local gen
+- name: restart daemons
   hosts: all
   become: yes
   
