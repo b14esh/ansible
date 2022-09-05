@@ -1,0 +1,10 @@
+---
+- name: local gen
+  hosts: all
+  become: yes
+  
+  tasks:
+  - name: Restart apache
+    ansible.builtin.service:
+      name: httpd
+      state: restarted
