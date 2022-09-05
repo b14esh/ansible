@@ -4,7 +4,18 @@
   become: yes
   
   tasks:
-  - name: Restart apache
+  - name: Restart zabbix-server
     ansible.builtin.service:
-      name: httpd
+      name: zabbix-server
       state: restarted
+      
+      
+  - name: Restart zabbix-agent
+    ansible.builtin.service:
+      name: zabbix-agent
+      state: restarted      
+      
+  - name: Restart apache2
+    ansible.builtin.service:
+      name: apache2
+      state: restarted           
