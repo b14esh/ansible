@@ -30,8 +30,8 @@
 
   - name: One way to avoid apt_key once it is removed from your distro
     block:
-      - name: faucet |no apt key
-        ansible.builtin.get_url:
+    - name: faucet |no apt key
+      ansible.builtin.get_url:
         url: https://packagecloud.io/faucetsdn/faucet/gpgkey
         dest: /etc/apt/trusted.gpg.d/faucet.asc
  
