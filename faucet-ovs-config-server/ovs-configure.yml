@@ -31,7 +31,7 @@
       ovs-vsctl set bridge ovsbr0 other-config:datapath-id=0000000000000001
       #ovs-vsctl set-fail-mode ovsbr0 secure
       ovs-vsctl set bridge ovsbr0 protocols=OpenFlow13,OpenFlow10
-      ovs-vsctl set-controller ovsbr0 tcp:127.0.0.1:6636 tcp:127.0.0.1:6637
+      ovs-vsctl set-controller ovsbr0 tcp:127.0.0.1:6653 tcp:127.0.0.1:6654
       
   - name: Add port for ovsbr0
     openvswitch.openvswitch.openvswitch_port:
