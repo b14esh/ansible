@@ -56,3 +56,13 @@
 
   - name: Restart faucet.service
     service: name=faucet.service state=restarted
+    
+  - name: Restart gauge.service
+    service: name=gauge.service state=restarted  
+    
+  - name: Restart grafana.service
+    service: name=grafana.service state=restarted 
+    
+  - name: Restart prometheus.service
+    service: name=prometheus.service state=restarted     
+    

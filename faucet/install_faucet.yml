@@ -9,6 +9,12 @@
      destin_file_grafana: /etc/grafana/provisioning/dashboards/dashboard.yml
      source_file_grafana1: ./datasource.yml
      destin_file_grafana1: /etc/grafana/provisioning/datasources/datasource.yml
+     source_file_grafana2: ./Faucet-Instrumentation-1662471631074.json
+     destin_file_grafana2: /etc/grafana/provisioning/dashboards/Faucet-Instrumentation-1662471631074.json
+     source_file_grafana3: ./Faucet-Inventory-1662471654645.json
+     destin_file_grafana3: /etc/grafana/provisioning/dashboards/Faucet-Inventory-1662471654645.json
+     source_file_grafana4: ./Faucet-Port-Statistics-1662471671319.json
+     destin_file_grafana4: /etc/grafana/provisioning/dashboards/Faucet-Port-Statistics-1662471671319.json   
      
   tasks:
   - name: Update apt repo and cache on all Debian/Ubuntu boxes
@@ -59,33 +65,42 @@
       line: 'ARGS="--config.file=/etc/faucet/prometheus/prometheus.yml"'
     notify: Restart promiteus
  
-
-  - name: Download dashboard  for grafana
-    get_url:
-       url: https://docs.faucet.nz/en/latest/_static/grafana-dashboards/faucet_instrumentation.json
-       dest: /etc/grafana/provisioning/dashboards/faucet_instrumentation.json
-       mode: '0644'
-
-    
-  - name: Download dashbord for grafana
-    get_url:
-       url: https://docs.faucet.nz/en/latest/_static/grafana-dashboards/faucet_inventory.json
-       dest: /etc/grafana/provisioning/dashboards/faucet_inventory.json
-       mode: '0644'
-
-     
-  - name: Download dashboard for grafana
-    get_url:
-       url: https://docs.faucet.nz/en/latest/_static/grafana-dashboards/faucet_port_statistics.json
-       dest: /etc/grafana/provisioning/dashboards/faucet_port_statistics.json
-       mode: '0644'
+###### bag grafana
+#  - name: Download dashboard  for grafana
+#    get_url:
+#       url: https://docs.faucet.nz/en/latest/_static/grafana-dashboards/faucet_instrumentation.json
+#       dest: /etc/grafana/provisioning/dashboards/faucet_instrumentation.json
+#       mode: '0644'
+#
+#    
+#  - name: Download dashbord for grafana
+#    get_url:
+#       url: https://docs.faucet.nz/en/latest/_static/grafana-dashboards/faucet_inventory.json
+#       dest: /etc/grafana/provisioning/dashboards/faucet_inventory.json
+#       mode: '0644'
+#
+#     
+#  - name: Download dashboard for grafana
+#    get_url:
+#       url: https://docs.faucet.nz/en/latest/_static/grafana-dashboards/faucet_port_statistics.json
+#       dest: /etc/grafana/provisioning/dashboards/faucet_port_statistics.json
+#       mode: '0644'
 
   - name: Copy file grafana to Server
     copy: src={{ source_file_grafana }} dest={{ destin_file_grafana }} mode=0640 owner=root group=grafana backup=yes 
 
   - name: Copy file grafana1 to Server
     copy: src={{ source_file_grafana1 }} dest={{ destin_file_grafana1 }} mode=0640 owner=root group=grafana backup=yes  
- 
+
+  - name: Copy file grafana2 to Server
+    copy: src={{ source_file_grafana2 }} dest={{ destin_file_grafana2 }} mode=0640 owner=root group=grafana backup=yes  
+
+  - name: Copy file grafana3 to Server
+    copy: src={{ source_file_grafana3 }} dest={{ destin_file_grafana3 }} mode=0640 owner=root group=grafana backup=yes  
+
+  - name: Copy file grafana4 to Server
+    copy: src={{ source_file_grafana4 }} dest={{ destin_file_grafana4 }} mode=0640 owner=root group=grafana backup=yes  
+    
   - name: Enable service grafana-server and ensure it is not masked
     ansible.builtin.systemd:
       name: grafana-server.service
