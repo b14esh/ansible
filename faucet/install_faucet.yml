@@ -81,10 +81,10 @@
        mode: '0644'
 
   - name: Copy file grafana to Server
-    copy: src={{ source_file_grafana }} dest={{ destin_file_grafana }} mode=0600 owner=root group=root backup=yes 
+    copy: src={{ source_file_grafana }} dest={{ destin_file_grafana }} mode=0600 owner=root group=grafana backup=yes 
 
   - name: Copy file grafana1 to Server
-    copy: src={{ source_file_grafana1 }} dest={{ destin_file_grafana1 }} mode=0600 owner=root group=root backup=yes  
+    copy: src={{ source_file_grafana1 }} dest={{ destin_file_grafana1 }} mode=0600 owner=root group=grafana backup=yes  
  
   - name: Enable service grafana-server and ensure it is not masked
     ansible.builtin.systemd:
