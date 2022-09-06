@@ -81,20 +81,14 @@
   - name: Copy file grafana to Server
     copy: src={{ source_file_grafana }} dest={{ destin_file_grafana }} mode=0600 owner=root group=root backup=yes 
 
-
-  - name: Restart service cron on centos, in all cases, also issue daemon-reload to pick up config changes
-    ansible.builtin.systemd:
-      state: restarted
-      daemon_reload: yes
-      name: crond
       
   - name: Enable service grafana-server and ensure it is not masked
     ansible.builtin.systemd:
       name: grafana-server.service
       enabled: yes
+      daemon_reload: yes
       masked: no
-    
- 
+     
   - name: Enable a timer unit for grafana-server
     ansible.builtin.systemd:
       name: grafana-server.service
