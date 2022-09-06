@@ -10,10 +10,10 @@
      
   tasks:
   - name: Copy file faucet to Server
-    copy: src={{ source_file_faucet }} dest={{ destin_file_faucet }} mode=0640 owner=root group=faucet backup=yes
+    copy: src={{ source_file_faucet }} dest={{ destin_file_faucet }} mode=0640 owner=faucet group=faucet backup=yes
  
   - name: Copy file faucet1 to Server
-    copy: src={{ source_file_faucet1 }} dest={{ destin_file_faucet1 }} mode=0640 owner=root group=faucet backup=yes
+    copy: src={{ source_file_faucet1 }} dest={{ destin_file_faucet1 }} mode=0640 owner=faucet group=faucet backup=yes
  
 
   - name: Remove network ovsbr0
