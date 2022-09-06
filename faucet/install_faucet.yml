@@ -95,14 +95,14 @@
       
   - name: Enable service grafana-server and ensure it is not masked
     ansible.builtin.systemd:
-      name: grafana-server
+      name: grafana-server.service
       enabled: yes
       masked: no
     
  
   - name: Enable a timer unit for grafana-server
     ansible.builtin.systemd:
-      name: grafana-server
+      name: grafana-server.service
       state: started
       enabled: yes   
       
