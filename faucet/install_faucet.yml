@@ -9,12 +9,12 @@
      destin_file_grafana: /etc/grafana/provisioning/dashboards/dashboard.yml
      source_file_grafana1: ./datasource.yml
      destin_file_grafana1: /etc/grafana/provisioning/datasources/datasource.yml
-     source_file_grafana2: ./Faucet-Instrumentation-1662471631074.json
-     destin_file_grafana2: /etc/grafana/provisioning/dashboards/Faucet-Instrumentation-1662471631074.json
-     source_file_grafana3: ./Faucet-Inventory-1662471654645.json
-     destin_file_grafana3: /etc/grafana/provisioning/dashboards/Faucet-Inventory-1662471654645.json
-     source_file_grafana4: ./Faucet-Port-Statistics-1662471671319.json
-     destin_file_grafana4: /etc/grafana/provisioning/dashboards/Faucet-Port-Statistics-1662471671319.json   
+     source_file_grafana2: ./Faucet-Instrumentation.json
+     destin_file_grafana2: /etc/grafana/provisioning/dashboards/Faucet-Instrumentation.json
+     source_file_grafana3: ./Faucet-Inventory.json
+     destin_file_grafana3: /etc/grafana/provisioning/dashboards/Faucet-Inventory.json
+     source_file_grafana4: ./Faucet-Port-Statistics.json
+     destin_file_grafana4: /etc/grafana/provisioning/dashboards/Faucet-Port-Statistics.json   
      
   tasks:
   - name: Update apt repo and cache on all Debian/Ubuntu boxes
