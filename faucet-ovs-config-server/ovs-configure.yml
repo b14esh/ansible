@@ -25,21 +25,21 @@
 
   - name: Add port for ovsbr0
     openvswitch.openvswitch.openvswitch_port:
-      bridge:ovsbr0
+      bridge: ovsbr0
       port: ens4
       state: present
       set: Interface ens4 ofport_request=4 
   
   - name: Add port for ovsbr0
     openvswitch.openvswitch.openvswitch_port:
-      bridge:ovsbr0
+      bridge: ovsbr0
       port: ens5
       state: present
       set: Interface ens5 ofport_request=5
       
   - name: Add port for ovsbr0
     openvswitch.openvswitch.openvswitch_port:
-      bridge:ovsbr0
+      bridge: ovsbr0
       port: ens6
       state: present
       set: Interface ens6 ofport_request=6
