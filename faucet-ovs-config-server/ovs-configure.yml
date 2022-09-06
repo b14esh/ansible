@@ -60,8 +60,8 @@
   - name: Restart gauge.service
     service: name=gauge.service state=restarted  
     
-  - name: Restart grafana.service
-    service: name=grafana.service state=restarted 
+  - name: Restart grafana-server.service
+    service: name=grafana-server.service state=restarted 
     
   - name: Restart prometheus.service
     service: name=prometheus.service state=restarted     
