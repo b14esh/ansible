@@ -1,0 +1,7 @@
+---
+acls:
+    office-vlan-protect:
+        # Prevent IPv4 communication betwen Office/Guest networks
+        - rule:
+              actions:
+                  allow: 1        # allow
