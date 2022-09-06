@@ -57,11 +57,6 @@
       line: 'ARGS="--config.file=/etc/faucet/prometheus/prometheus.yml"'
     notify: Restart promiteus
  
-  handlers:
-  - name: Restart promiteus
-    service: name=prometheus.service state=restarted
-    
-
 
   - name: Download dashboard  for grafana
     get_url:
@@ -106,3 +101,7 @@
       state: started
       enabled: yes   
       
+  handlers:
+  - name: Restart promiteus
+    service: name=prometheus.service state=restarted
+    
