@@ -2,18 +2,18 @@
 - name: ovs-config
   hosts: all
   become: yes
-    vars:
+  vars:
      source_file_faucet: ./faucet
      destin_file_faucet: /etc/faucet/faucet.yaml
      source_file_faucet1: ./acls
-     destin_file_faucet1: /etc/faucet/acls.yaml 
+     destin_file_faucet1: /etc/faucet/acls.yaml
      
   tasks:
   - name: Copy file faucet to Server
-    copy: src={{ source_file_faucet }} dest={{ destin_file_faucet }} mode=0640 owner=root group=root backup=yes 
+    copy: src={{ source_file_faucet }} dest={{ destin_file_faucet }} mode=0640 owner=root group=root backup=yes
  
   - name: Copy file faucet1 to Server
-    copy: src={{ source_file_faucet1 }} dest={{ destin_file_faucet1 }} mode=0640 owner=root group=root backup=yes   
+    copy: src={{ source_file_faucet1 }} dest={{ destin_file_faucet1 }} mode=0640 owner=root group=root backup=yes
     
   - name: Add new network ovsbr0  
     openvswitch.openvswitch.openvswitch_bridge:
@@ -35,14 +35,14 @@
       bridge:ovsbr0
       port: ens5
       state: present
-      set: Interface ens5 ofport_request=5       
+      set: Interface ens5 ofport_request=5
       
   - name: Add port for ovsbr0
     openvswitch.openvswitch.openvswitch_port:
       bridge:ovsbr0
       port: ens6
       state: present
-      set: Interface ens6 ofport_request=6 
+      set: Interface ens6 ofport_request=6
 
   - name: Restart faucet.service
-    service: name=faucet.service state=restarted   
+    service: name=faucet.service state=restarted
