@@ -1,0 +1,44 @@
+---
+- name: ovs-config
+  hosts: all
+  become: yes
+     
+  tasks:
+
+  - name: Remove network ovsbr0
+    openvswitch_bridge:
+      bridge: ovsbr0
+      state: absent
+    
+  - name: Add new network ovsbr0
+    openvswitch.openvswitch.openvswitch_bridge:
+      bridge: ovsbr0
+      state: present
+    
+  - name: Add parametrs ovsbr0
+    shell: |
+      ovs-vsctl set bridge ovsbr0 other-config:datapath-id=0000000000000002
+      #ovs-vsctl set-fail-mode ovsbr0 secure
+      ovs-vsctl set bridge ovsbr0 protocols=OpenFlow13,OpenFlow10
+      ovs-vsctl set-controller ovsbr0 tcp:10.0.0.2:6653 tcp:10.0.0.2:6654
+      
+  - name: Add port for ovsbr0
+    openvswitch.openvswitch.openvswitch_port:
+      bridge: ovsbr0
+      port: ens4
+      state: present
+      set: Interface ens4 ofport_request=4 
+  
+  - name: Add port for ovsbr0
+    openvswitch.openvswitch.openvswitch_port:
+      bridge: ovsbr0
+      port: ens5
+      state: present
+      set: Interface ens5 ofport_request=5
+      
+  - name: Add port for ovsbr0
+    openvswitch.openvswitch.openvswitch_port:
+      bridge: ovsbr0
+      port: ens6
+      state: present
+      set: Interface ens6 ofport_request=6

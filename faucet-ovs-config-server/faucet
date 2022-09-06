@@ -8,7 +8,7 @@ vlans:
         description: "office network"
         acls_in: [office-vlan-protect]
 dps:
-    sw0:
+    sw1:
         dp_id: 0x1
         hardware: "Open vSwitch"
         interfaces:
@@ -24,3 +24,19 @@ dps:
                 name: "6"
                 description: "in6"
                 native_vlan: office
+    sw2:
+        dp_id: 0x2
+        hardware: "Open vSwitch"
+        interfaces:
+            4:
+                name: "4"
+                description: "in4"
+                native_vlan: office
+            5:
+                name: "5"
+                description: "in5"
+                native_vlan: office
+            6:
+                name: "6"
+                description: "in6"
+                native_vlan: office				
