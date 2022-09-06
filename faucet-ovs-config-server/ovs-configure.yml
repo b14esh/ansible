@@ -14,12 +14,18 @@
  
   - name: Copy file faucet1 to Server
     copy: src={{ source_file_faucet1 }} dest={{ destin_file_faucet1 }} mode=0640 owner=root group=root backup=yes
+ 
+
+  - name: Remove network ovsbr0
+    openvswitch_bridge:
+      bridge: ovsbr0
+      state: absent
     
   - name: Add new network ovsbr0
     openvswitch.openvswitch.openvswitch_bridge:
       bridge: ovsbr0
       state: present
-      set: set-controller ovsbr0 tcp:127.0.0.1:6653 tcp:127.0.0.1:6654 -- set-controller ovsbr0 tcp:127.0.0.1:6653 tcp:127.0.0.1:6654 -- bridge ovsbr0 other-config:datapath-id=0000000000000001
+      set: set-controller ovsbr0 tcp:127.0.0.1:6653 tcp:127.0.0.1:6654 -- set-controller ovsbr0 tcp:127.0.0.1:6653 tcp:127.0.0.1:6654 -- set bridge ovsbr0 other-config:datapath-id=0000000000000001
       
   - name: Add port for ovsbr0
     openvswitch.openvswitch.openvswitch_port:
