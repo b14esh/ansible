@@ -7,6 +7,8 @@
      destin_file_faucet: /etc/apt/sources.list.d/faucet.list
      source_file_grafana: ./dashboard.yml
      destin_file_grafana: /etc/grafana/provisioning/dashboards/dashboard.yml
+     source_file_grafana1: ./datasource.yml
+     destin_file_grafana1: /etc/grafana/provisioning/datasources/datasource.yml
      
   tasks:
   - name: Update apt repo and cache on all Debian/Ubuntu boxes
@@ -81,7 +83,9 @@
   - name: Copy file grafana to Server
     copy: src={{ source_file_grafana }} dest={{ destin_file_grafana }} mode=0600 owner=root group=root backup=yes 
 
-      
+  - name: Copy file grafana1 to Server
+    copy: src={{ source_file_grafana1 }} dest={{ destin_file_grafana1 }} mode=0600 owner=root group=root backup=yes  
+ 
   - name: Enable service grafana-server and ensure it is not masked
     ansible.builtin.systemd:
       name: grafana-server.service
