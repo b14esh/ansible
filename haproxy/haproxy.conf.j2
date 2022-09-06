@@ -37,8 +37,15 @@ defaults
 frontend  front
     bind 0.0.0.0:80
     default_backend front
+
+frontend  front1
+    bind 0.0.0.0:3000
+    default_backend front1
  
 backend front
     balance source
     server zabbix 10.0.0.4:80 check
-
+ 
+backend front1
+    balance source
+    server faucet 10.0.0.2:3000 check
