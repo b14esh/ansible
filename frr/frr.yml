@@ -1,0 +1,11 @@
+---
+- name: Install frr
+  hosts: all
+  become: yes
+  
+  tasks:
+  - name: Install "frr from repository" package
+    apt:
+     name: frr
+     state: present
+
