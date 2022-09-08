@@ -48,23 +48,23 @@
 
   - name: Add config frr for noda_a
     template:
-       src: {{ source_file_frr_a }}
-       dest: {{ destin_file_frr }}
-    when: ansible_nodename == {{ noda_a }}   
+       src: "{{ source_file_frr_a }}"
+       dest: "{{ destin_file_frr }}"
+    when: ansible_nodename == "{{ noda_a }}"   
     notify: Restart frr.service 
  
   - name: Add config frr for noda_b
     template:
-       src: {{ source_file_frr_b }}
-       dest: {{ destin_file_frr }}
-    when: ansible_nodename == {{ noda_b }}   
+       src: "{{ source_file_frr_b }}"
+       dest: "{{ destin_file_frr }}"
+    when: ansible_nodename == "{{ noda_b }}"   
     notify: Restart frr.service 
 
   - name: Add config frr for noda_c
     template:
-       src: {{ source_file_frr_c }}
-       dest: {{ destin_file_frr }}
-    when: ansible_nodename == {{ noda_c }}   
+       src: "{{ source_file_frr_c }}"
+       dest: "{{ destin_file_frr }}"
+    when: ansible_nodename == "{{ noda_c }}"   
     notify: Restart frr.service 
 
     
