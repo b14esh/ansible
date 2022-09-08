@@ -1,0 +1,24 @@
+# default to using syslog. /etc/rsyslog.d/45-frr.conf places the log
+# in /var/log/frr/frr.log
+log syslog informational
+frr defaults traditional
+service integrated-vtysh-config
+hostname bgp1
+!
+router bgp 64500
+ bgp router-id 10.0.0.7
+ network 10.0.0.0/24
+ neighbor 10.0.0.2 remote-as 64501
+ neighbor 10.0.0.2 route-map MAP-FROM-BGP in
+ neighbor 10.0.0.2 route-map soft-reconfiguration inbound
+ neighbor 10.0.0.2 route-map description faucet.inc
+ neighbor 10.0.0.6 remote-as 64502
+ neighbor 10.0.0.6 route-map MAP-FROM-BGP in
+ neighbor 10.0.0.6 route-map soft-reconfiguration inbound
+ neighbor 10.0.0.6 route-map description clientf1.inc 
+!
+ip prefix-list PREFIX-LIST-FROM-BGP seq 1 permit 10.0.0.0/24
+ip prefix-list PREFIX-LIST-FROM-BGP seq 2 permit 172.16.0.0/24
+ip prefix-list PREFIX-LIST-FROM-BGP seq 3 permit 10.20.0.0/24
+route-map MAP-FROM-BGP permit 10
+ match ip address prefix-list PREFIX-LIST-FROM-BGP
