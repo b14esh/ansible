@@ -6,6 +6,8 @@ service integrated-vtysh-config
 hostname faucet.inc
 !
 router bgp 64501
+neighbor 10.0.0.7 remote-as 64500
+neighbor  10.0.0.6 remote-as 64502
  bgp router-id 10.0.0.2
  address-family ipv4 unicast
   network 10.0.0.0/24

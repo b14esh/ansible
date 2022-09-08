@@ -6,6 +6,8 @@ service integrated-vtysh-config
 hostname clientf1.inc
 !
 router bgp 64502
+neighbor 10.0.0.2 remote-as 64501
+neighbor  10.0.0.7 remote-as 64500
  bgp router-id 10.0.0.6
  address-family ipv4 unicast
   network 10.0.0.0/24
