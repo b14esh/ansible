@@ -4,21 +4,19 @@
   become: yes
   gather_facts: true
   vars:
-  
-#       noda_a: bgp1.inc
-#       noda_a_ip: 10.0.0.7
-#       noda_b: faucet.inc
-#       noda_b_ip: 10.0.0.2
-#       noda_c: clientf1.inc
-#       noda_c_ip: 10.0.0.6
-#       source_file_frr_daemon: ./config/daemons.j2
-#       destin_file_frr_daemon: /etc/frr/daemons
-
+       noda_a: bgp1.inc
+       noda_a_ip: 10.0.0.7
+       noda_b: faucet.inc
+       noda_b_ip: 10.0.0.2
+       noda_c: clientf1.inc
+       noda_c_ip: 10.0.0.6
+       source_file_frr_daemon: ./config/daemons.j2
+       destin_file_frr_daemon: /etc/frr/daemons
        source_file_frr_a: ./config/a_frr.conf.j2
        source_file_frr_b: ./config/b_frr.conf.j2
        source_file_frr_c: ./config/c_frr.conf.j2
        destin_file_frr: /etc/frr/frr.conf
-       
+
   tasks:
   - name: Show facts available on the system nodename
     debug:
