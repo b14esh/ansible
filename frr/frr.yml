@@ -4,9 +4,14 @@
   become: yes
   gather_facts: true
   vars:
-       noda_a: bgp1.inc
-       noda_b: faucet.inc
-       noda_c: clientf1.inc      
+#       noda_a: bgp1.inc
+#       noda_a_ip: 10.0.0.7
+#       noda_b: faucet.inc
+#       noda_b_ip: 10.0.0.2
+#       noda_c: clientf1.inc
+#       noda_c_ip: 10.0.0.6
+#       source_file_frr_daemon: ./config/daemons.j2
+#       destin_file_frr_daemon: /etc/frr/daemons
        source_file_frr_a: ./config/a_frr.conf.j2
        source_file_frr_b: ./config/b_frr.conf.j2
        source_file_frr_c: ./config/c_frr.conf.j2
@@ -16,7 +21,12 @@
   - name: Show facts available on the system
     debug:
        var: ansible_nodename 
-       
+
+#  - name: Show facts available on the system
+#    debug:
+#       var: ansible_default_ipv4.address  
+
+ 
   - name: Install "frr from repository" package
     apt:
      name: frr
@@ -45,6 +55,16 @@
       sysctl_set: yes
       state: present
       reload: yes   
+
+#  - name: Add config frr for daemon
+#    template:
+#       src: "{{ source_file_frr_daemon }}"
+#       dest: "{{ destin_file_frr_daemon }}" 
+#       mode: 0640 
+#       owner: frr 
+#       group: frr 
+#       backup: yes       
+#   notify: Restart frr.service 
 
   - name: Add config frr for noda_a
     template:
