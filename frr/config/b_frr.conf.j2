@@ -7,19 +7,7 @@ hostname faucet.inc
 !
 router bgp 64501
  bgp router-id 10.0.0.2
- network 10.0.0.0/24
- network 172.16.0.0/24
- neighbor 10.0.0.7 remote-as 64500
- neighbor 10.0.0.7 route-map MAP-FROM-BGP in
- neighbor 10.0.0.7 route-map soft-reconfiguration inbound
- neighbor 10.0.0.7 route-map description bgp1.inc
- neighbor 10.0.0.6 remote-as 64502
- neighbor 10.0.0.6 route-map MAP-FROM-BGP in
- neighbor 10.0.0.6 route-map soft-reconfiguration inbound
- neighbor 10.0.0.6 route-map description clientf1.inc 
-!
-ip prefix-list PREFIX-LIST-FROM-BGP seq 1 permit 10.0.0.0/24
-ip prefix-list PREFIX-LIST-FROM-BGP seq 2 permit 172.16.0.0/24
-ip prefix-list PREFIX-LIST-FROM-BGP seq 3 permit 10.20.0.0/24
-route-map MAP-FROM-BGP permit 10
- match ip address prefix-list PREFIX-LIST-FROM-BGP
+ address-family ipv4 unicast
+  network 10.0.0.0/24
+  network 172.16.0.0/24
+ exit-address-family
