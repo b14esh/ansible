@@ -7,9 +7,9 @@
        noda_a: bgp1.inc
        noda_b: faucet.inc
        noda_c: clientf1.inc      
-       source_file_frr_a: ./a_frr.conf.j2
-       source_file_frr_b: ./b_frr.conf.j2
-       source_file_frr_c: ./c_frr.conf.j2
+       source_file_frr_a: ./config/a_frr.conf.j2
+       source_file_frr_b: ./config/b_frr.conf.j2
+       source_file_frr_c: ./config/c_frr.conf.j2
        destin_file_frr: /etc/frr/frr.conf
        
   tasks:
