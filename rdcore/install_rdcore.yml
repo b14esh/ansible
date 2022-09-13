@@ -36,7 +36,153 @@
       state: latest
       update_cache: True
     when: ansible_os_family == "Debian"
+
+- name: Read-write git checkout from github
+  ansible.builtin.git:
+    repo: https://github.com/RADIUSdesk/rdcore.git
+    dest: /var/www
+    update: no
+
+
+- name: Create a symbolic link rd
+  ansible.builtin.file:
+    src: /var/www//rdcore/rd
+    dest: /var/www/html/rd
+    owner: www-data
+    group: www-data
+    state: link
     
+
+- name: Create a symbolic link cake4
+  ansible.builtin.file:
+    src: /var/www//rdcore/cake4
+    dest: /var/www/html/cake4
+    owner: www-data
+    group: www-data
+    state: link
+
+- name: Create a symbolic link login
+  ansible.builtin.file:
+    src: /var/www//rdcore/login
+    dest: /var/www/html/login
+    owner: www-data
+    group: www-data
+    state: link
+
+- name: Create a symbolic link conf_dev
+  ansible.builtin.file:
+    src: /var/www//rdcore/AmpConf/build/production/AmpConf
+    dest: /var/www/html/conf_dev
+    owner: www-data
+    group: www-data
+    state: link
+
+- name: Create a symbolic link AmpConf
+  ansible.builtin.file:
+    src: /var/www//rdcore/login/rd_client/build/production/AmpConf
+    dest: /var/www/html/usage
+    owner: www-data
+    group: www-data
+    state: link
+
+- name: Create a symbolic link reporting
+  ansible.builtin.file:
+    src: /var/www//rdcore/cake4/rd_cake/setup/scripts/reporting
+    dest: /var/www/html/reporting
+    owner: www-data
+    group: www-data
+    state: link
+
+- name: Create a directory logs it does not exist
+  ansible.builtin.file:
+    path: /var/www/html/cake4/rd_cake/logs
+    state: directory
+    recurse: yes
+    owner: www-data
+    group: www-data
+    mode: '0755'
+    
+
+- name: Create a directory imagecache it does not exist
+  ansible.builtin.file:
+    path: /var/www/html/cake4/rd_cake/webroot/files/imagecache
+    state: directory
+    recurse: yes
+    owner: www-data
+    group: www-data
+    mode: '0755'
+
+- name: Create a directory tmp it does not exist
+  ansible.builtin.file:
+    path: /var/www/html/cake4/rd_cake/tmp
+    state: directory
+    recurse: yes
+    owner: www-data
+    group: www-data
+    mode: '0755'
+
+- name: Give insecure permissions tmp to an existing file
+  ansible.builtin.file:
+    path: /var/www/html/cake4/rd_cake/tmp
+    owner: www-data
+    group: www-data
+
+- name: Give insecure permissions tmp to an existing file
+  ansible.builtin.file:
+    path: /var/www/html/cake4/rd_cake/tmp
+    owner: www-data
+    group: www-data
+    recurse: yes
+
+- name: Give insecure permissions to an existing file
+  ansible.builtin.file:
+    path: /var/www/html/cake4/rd_cake/logs
+    owner: www-data
+    group: www-data
+    recurse: yes
+
+- name: Give insecure permissions to an existing file
+  ansible.builtin.file:
+    path: /var/www/html/cake4/rd_cake/webroot/img/realms
+    owner: www-data
+    group: www-data
+    recurse: yes
+
+- name: Give insecure permissions to an existing file
+  ansible.builtin.file:
+    path: /var/www/html/cake4/rd_cake/webroot/img/dynamic_details
+    owner: www-data
+    group: www-data
+    recurse: yes
+
+- name: Give insecure permissions to an existing file
+  ansible.builtin.file:
+    path: /var/www/html/cake4/rd_cake/webroot/img/dynamic_photos
+    owner: www-data
+    group: www-data
+    recurse: yes
+
+- name: Give insecure permissions to an existing file
+  ansible.builtin.file:
+    path: /var/www/html/cake4/rd_cake/webroot/img/access_providers
+    owner: www-data
+    group: www-data
+    recurse: yes
+
+- name: Give insecure permissions to an existing file
+  ansible.builtin.file:
+    path: /var/www/html/cake4/rd_cake/webroot/img/hardwares
+    owner: www-data
+    group: www-data
+    recurse: yes
+
+- name: Give insecure permissions to an existing file
+  ansible.builtin.file:
+    path: /var/www/html/cake4/rd_cake/webroot/files/imagecache
+    owner: www-data
+    group: www-data
+    recurse: yes
+
   handlers:
   - name: Restart nginx.service 
     service: name=nginx.service  state=restarted
