@@ -1,0 +1,22 @@
+---
+- hosts: all
+  become: yes
+  
+  tasks:
+  - name: Cheack and Print Linux Version
+    debug: var=ansible_os_family
+
+  - name: Install "olsrd from repository" package
+    apt:
+     name: olsrd 
+     state: present
+
+#  - name: Add config zabbix agent
+#    template:
+#       src: ./olsrd.conf.j2
+#       dest: /etc/olsr/olsrd.conf
+#    notify: Restart olsrd   
+
+#  handlers:
+#  - name: Restart olsrd
+#    service: name=olsrd state=restarted      
