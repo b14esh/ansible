@@ -1,7 +1,16 @@
 ---
 - hosts: all
   become: yes
-  
+  vars:
+     mysql_root_password: "password"
+     destin_file_cnf: /root/.my.cnf
+     source_file_cnf: ./.my.cnf
+     rd_user: "rd"
+     rd_password: "rd"
+     rd_db: "zabbix"
+     rd_host: "localhost"
+     rd_priv: "{{ rd_db }}.*:ALL"
+
   tasks:
   - name: Cheack and Print Linux Version
     debug: var=ansible_os_family
@@ -33,6 +42,11 @@
         - php-intl
         - git
         - wget
+        - python3-apt
+        - python3 
+        - python3-pip 
+        - python3-setuptools
+        - python3-pymysql
       state: latest
       update_cache: True
     when: ansible_os_family == "Debian"
@@ -182,6 +196,75 @@
       owner: www-data
       group: www-data
       recurse: yes
+
+  - name: Copy file cnf to Servers
+    copy: src={{ source_file_cnf }} dest={{ destin_file_cnf }} mode=0600 owner=root group=root backup=yes 
+
+  - name: Edit line password
+    lineinfile:
+      path: /root/.my.cnf
+      state: present
+      regexp: '^password='
+      line: 'password="{{ mysql_root_password }}"'
+
+
+  - name: Remove the test database
+    mysql_db:
+      login_unix_socket: /var/run/mysqld/mysqld.sock
+      name: test
+      state: absent
+
+  - name: Remove anonymous user
+    mysql_user:
+      login_unix_socket: /var/run/mysqld/mysqld.sock
+      name: ''
+      state: absent
+  
+  - name: Sets the root password 
+    mysql_user:
+       login_unix_socket: /var/run/mysqld/mysqld.sock
+       user: root 
+       password: "{{ mysql_root_password }}" 
+       host: localhost  
+
+  - name: "Create new databases with names {{ rd_user }}"
+    mysql_db:
+      login_unix_socket: /var/run/mysqld/mysqld.sock
+      name: "{{ rd_user }}"
+      encoding: utf8
+      collation: utf8_bin
+      state: present
+  
+  - name: "Add user and add  privilege for {{ rd_db }}"
+    mysql_user:
+      login_unix_socket: /var/run/mysqld/mysqld.sock
+      login_host: "localhost"
+      name: "{{ rd_db }}"
+      password: "{{ rd_password }}"
+      host: "localhost"
+      priv: "{{ rd_priv }}"
+      state: present
+      append_privs: yes
+
+  - name: Importing databases
+    mysql_db:
+      name: "{{ rd_db }}"
+      login_user: "{{ rd_user }}"
+      login_host: localhost
+      login_password: "{{ rd_password }}"
+      config_file: no
+      state: import
+      encoding: utf8
+      collation: utf8_bin
+      target: "/var/www/html/cake4/rd_cake/setup/db/rd.sql"
+
+#  - name: Edit line db_password for rd
+#    lineinfile:
+#      path: /etc/????????..zxc
+#      state: present
+#      regexp: '^DBPassword='
+#      line: 'DBPassword={{ rd_password }}'
+
 
   handlers:
   - name: Restart nginx.service 
