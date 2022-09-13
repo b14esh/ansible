@@ -22,7 +22,6 @@
     apt:
       pkg:
         - nginx
-        - language-pack-en-base
         - php-fpm
         - mariadb-server
         - php-mysql
