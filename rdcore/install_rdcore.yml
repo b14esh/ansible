@@ -4,23 +4,20 @@
   
   tasks:
   - name: Cheack and Print Linux Version
-    debug: var=ansible_os_family
 
-#https://github.com/RADIUSdesk/rdcore/wiki/Prepare-RdCore-on-Ubuntu-20.04
-#  - name: Install "olsrd from repository" package
-#    apt:
-#     name: olsrd 
-#     state: present
+  - name: Add config nginx.service 
+    template:
+       src: ./default.conf.j2
+       dest: /etc/nginx/sites-enabled/default
+    notify: Restart nginx.service  
 
-#  - name: Add config zabbix agent
-#    template:
-#       src: ./olsrd.conf.j2
-#       dest: /etc/olsr/olsrd.conf
-#    notify: Restart olsrd   
+  - name: Add config mariadb.service disable strict mode
+    template:
+       src: ./disable_strict_mode.cnf.j2
+       dest: /etc/mysql/conf.d/disable_strict_mode.cnf
+    notify: Restart mariadb.service 
 
-#  handlers:
-#  - name: Restart olsrd
-#    service: name=olsrd state=restarted      
+
 
   - name: Install a list of packages
     apt:
@@ -40,3 +37,12 @@
       state: latest
       update_cache: True
     when: ansible_os_family == "Debian"
+    
+    
+    
+  handlers:
+  - name: Restart nginx.service 
+    service: name=nginx.service  state=restarted      
+  - name: Restart mariadb.service
+    service: name=mariadb.service state=restarted         
+    
