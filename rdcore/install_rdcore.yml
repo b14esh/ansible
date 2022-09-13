@@ -1,0 +1,42 @@
+---
+- hosts: all
+  become: yes
+  
+  tasks:
+  - name: Cheack and Print Linux Version
+    debug: var=ansible_os_family
+
+#https://github.com/RADIUSdesk/rdcore/wiki/Prepare-RdCore-on-Ubuntu-20.04
+#  - name: Install "olsrd from repository" package
+#    apt:
+#     name: olsrd 
+#     state: present
+
+#  - name: Add config zabbix agent
+#    template:
+#       src: ./olsrd.conf.j2
+#       dest: /etc/olsr/olsrd.conf
+#    notify: Restart olsrd   
+
+#  handlers:
+#  - name: Restart olsrd
+#    service: name=olsrd state=restarted      
+
+  - name: Install a list of packages
+    apt:
+      pkg:
+        - nginx
+        - php-fpm
+        - mariadb-server
+        - php-mysql
+        - php-cli
+        - php-gd
+        - php-curl
+        - php-xml
+        - php-mbstring
+        - php-intl
+        - git
+        - wget
+      state: latest
+      update_cache: True
+    when: ansible_os_family == "Debian"
