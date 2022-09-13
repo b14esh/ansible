@@ -40,7 +40,7 @@
   - name: Read-write git checkout from github
     ansible.builtin.git:
       repo: https://github.com/RADIUSdesk/rdcore.git
-      dest: /var/www
+      dest: /var/www/rdcore
       update: no
 
 
