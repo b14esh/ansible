@@ -7,7 +7,7 @@
      source_file_cnf: ./.my.cnf
      rd_user: "rd"
      rd_password: "rd"
-     rd_db: "zabbix"
+     rd_db: "rd"
      rd_host: "localhost"
      rd_priv: "{{ rd_db }}.*:ALL"
 
