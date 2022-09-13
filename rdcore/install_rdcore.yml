@@ -4,6 +4,7 @@
   
   tasks:
   - name: Cheack and Print Linux Version
+    debug: var=ansible_os_family
 
   - name: Add config nginx.service 
     template:
@@ -16,8 +17,6 @@
        src: ./disable_strict_mode.cnf.j2
        dest: /etc/mysql/conf.d/disable_strict_mode.cnf
     notify: Restart mariadb.service 
-
-
 
   - name: Install a list of packages
     apt:
@@ -38,11 +37,9 @@
       update_cache: True
     when: ansible_os_family == "Debian"
     
-    
-    
   handlers:
   - name: Restart nginx.service 
-    service: name=nginx.service  state=restarted      
+    service: name=nginx.service  state=restarted
   - name: Restart mariadb.service
-    service: name=mariadb.service state=restarted         
+    service: name=mariadb.service state=restarted
     
