@@ -70,8 +70,8 @@
        owner: freerad
        group: freerad
 
-  - name: Copy file dynamic-clients to Servers
-    copy: src={{ source_file_dynamic-clients }} dest={{ destin_file_dynamic-clients }} mode=0600 owner=freerad group=freerad backup=no
+  - name: Copy file freeradius to Servers
+    copy: src={{ source_file_freeradius }} dest={{ destin_file_freeradius }} mode=0600 owner=freerad group=freerad backup=no
     
   - name: Copy file freeradius.service to Servers
     copy: src={{ source_file_fd }} dest={{ destin_file_fd }} mode=0600 owner=freerad group=freerad backup=no
@@ -81,8 +81,7 @@
       state: restarted
       daemon_reload: yes
       name: freeradius.service
-      
-      
+
   - name: Simple select query to acme db
     community.mysql.mysql_query:
      login_db: rd
