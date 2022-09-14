@@ -41,9 +41,13 @@ server {
         root /var/www/html;
 
         # Add index.php to the list if you are using PHP
-        index index.html index.htm index.nginx-debian.html;
+        index index.php index.html index.htm index.nginx-debian.html;
 
         server_name _;
+		
+		location /cake4/rd_cake/node-reports/submit_report.json {
+             try_files $uri $uri/ /reporting/reporting.php;
+        }
 
         location / {
                 # First attempt to serve request as file, then
@@ -54,10 +58,10 @@ server {
         # pass PHP scripts to FastCGI server
         #
         location ~ \.php$ {
-               include snippets/fastcgi-php.conf;
+                include snippets/fastcgi-php.conf;
         #
         #       # With php-fpm (or other unix sockets):
-               fastcgi_pass unix:/run/php/php7.4-fpm.sock;
+                fastcgi_pass unix:/run/php/php7.4-fpm.sock;
         #       # With php-cgi (or other tcp sockets):
         #       fastcgi_pass 127.0.0.1:9000;
         }
@@ -68,12 +72,17 @@ server {
         location ~ /\.ht {
                deny all;
 			   
-		location ~ ^/cake4/.+\.(jpg|jpeg|gif|png|ico|js|css)$ {
+        location ~ ^/cake4/.+\.(jpg|jpeg|gif|png|ico|js|css)$ {
                rewrite ^/cake4/rd_cake/webroot/(.*)$ /cake4/rd_cake/webroot/$1 break;
                rewrite ^/cake4/rd_cake/(.*)$ /cake4/rd_cake/webroot/$1 break;
                access_log off;
                expires max;
                add_header Cache-Control public;
+			   
+	    location /cake4/rd_cake {
+          rewrite ^/cake4/rd_cake(.+)$ /cake4/rd_cake/webroot$1 break;
+          try_files $uri $uri/ /cake4/rd_cake/index.php$is_args$args;
+        }
 }	   
         }
 }
