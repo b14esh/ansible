@@ -28,6 +28,7 @@
         - php-xml
         - php-mbstring
         - php-intl
+        - php-sqlite3
         - git
         - wget
         - python3-apt
