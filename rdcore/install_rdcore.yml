@@ -15,18 +15,6 @@
   - name: Cheack and Print Linux Version
     debug: var=ansible_os_family
 
-  - name: Add config nginx.service 
-    template:
-       src: ./default.conf.j2
-       dest: /etc/nginx/sites-enabled/default
-    notify: Restart nginx.service  
-
-  - name: Add config mariadb.service disable strict mode
-    template:
-       src: ./disable_strict_mode.cnf.j2
-       dest: /etc/mysql/conf.d/disable_strict_mode.cnf
-    notify: Restart mariadb.service 
-
   - name: Install a list of packages
     apt:
       pkg:
@@ -50,6 +38,18 @@
       state: latest
       update_cache: True
     when: ansible_os_family == "Debian"
+
+  - name: Add config nginx.service 
+    template:
+       src: ./default.conf.j2
+       dest: /etc/nginx/sites-enabled/default
+    notify: Restart nginx.service  
+
+  - name: Add config mariadb.service disable strict mode
+    template:
+       src: ./disable_strict_mode.cnf.j2
+       dest: /etc/mysql/conf.d/disable_strict_mode.cnf
+    notify: Restart mariadb.service 
 
   - name: Read-write git checkout from github
     ansible.builtin.git:
