@@ -1,0 +1,90 @@
+---
+- hosts: all
+  become: yes
+  vars:
+     mysql_root_password: "password"
+     source_file_freeradius: ./dynamic-clients
+     destin_file_freeradius: /etc/freeradius/3.0/sites-enabled/dynamic-clients
+     source_file_fd: ./freeradius.service
+     destin_file_fd: /lib/systemd/system/freeradius.service
+     rd_user: "rd"
+     rd_password: "rd"
+     rd_db: "rd"
+     rd_host: "localhost"
+     rd_priv: "{{ rd_db }}.*:ALL"
+
+  tasks:
+  - name: Cheack and Print Linux Version
+    debug: var=ansible_os_family
+    
+#Please check your /WWW_ROOT/cake3/rd_cake/logs/error.log for error details
+
+  - name: Install a list of packages
+    apt:
+      pkg:
+        - libdatetime-perl
+        - freeradius
+        - freeradius-mysql
+      state: latest
+      update_cache: True
+    when: ansible_os_family == "Debian"
+
+  - name: Stop service freeradius, if started
+    ansible.builtin.service:
+      name: freeradius
+      state: stopped
+
+  - name: stat foo
+    stat: path=/etc/freeradius.orig
+    register: foo_stat
+
+  - name: Move foo to bar
+    command: mv /etc/freeradius /etc/freeradius.orig
+    when: foo_stat.stat.exists 
+ 
+  - name: Unarhive file freeradius-3-radiusdesk.tar.gz
+    unarchive:
+      src:  /var/www/rdcore/cake4/rd_cake/setup/radius/freeradius-3-radiusdesk.tar.gz
+      dest: /etc/freeradius/3.0
+      remote_src: yes  
+      
+  - name: Recursively change ownership of a directory freeradius
+    ansible.builtin.file:
+      path: /etc/freeradius/3.0
+      state: directory
+      recurse: yes
+      owner: freerad
+      group: freerad
+     
+  - name: Create a directory if it does not exist freeradius
+    ansible.builtin.file:
+      path: /var/run/freeradius
+      state: directory
+      mode: '0755'   
+  
+  - name: Recursively change ownership of a directory freeradius
+    ansible.builtin.file:
+       path: /var/run/freeradius
+       state: directory
+       recurse: yes
+       owner: freerad
+       group: freerad
+
+  - name: Copy file dynamic-clients to Servers
+    copy: src={{ source_file_dynamic-clients }} dest={{ destin_file_dynamic-clients }} mode=0600 owner=freerad group=freerad backup=no
+    
+  - name: Copy file freeradius.service to Servers
+    copy: src={{ source_file_fd }} dest={{ destin_file_fd }} mode=0600 owner=freerad group=freerad backup=no
+    
+  - name: Restart service cron on centos, in all cases, also issue daemon-reload to pick up config changes
+    ansible.builtin.systemd:
+      state: restarted
+      daemon_reload: yes
+      name: freeradius.service
+      
+      
+  - name: Simple select query to acme db
+    community.mysql.mysql_query:
+     login_db: rd
+     query: delete from nas where nasname='127.0.0.1'
+     

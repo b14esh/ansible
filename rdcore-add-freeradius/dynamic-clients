@@ -1,0 +1,11 @@
+#  Echo the IP address of the client.
+FreeRADIUS-Client-IP-Address = "%{Packet-Src-IP-Address}"
+ 
+# require_message_authenticator
+FreeRADIUS-Client-Require-MA = no
+ 
+# secret
+FreeRADIUS-Client-Secret = "testing123"
+ 
+# shortname
+FreeRADIUS-Client-Shortname = "%{Packet-Src-IP-Address}"

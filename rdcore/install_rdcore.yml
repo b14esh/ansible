@@ -15,6 +15,11 @@
   - name: Cheack and Print Linux Version
     debug: var=ansible_os_family
 
+# https://github.com/RADIUSdesk/rdcore/wiki/Prepare-RdCore-on-Ubuntu-20.04
+# https://github.com/RADIUSdesk/rdcore/wiki/Installing-RdCore-on-Ubuntu-20.04
+# https://github.com/RADIUSdesk/rdcore/wiki/Installing-FreeRADIUS-version-3.x-on-Ubuntu-20.04    
+# Please check your /WWW_ROOT/cake3/rd_cake/logs/error.log for error details
+
   - name: Install a list of packages
     apt:
       pkg:
