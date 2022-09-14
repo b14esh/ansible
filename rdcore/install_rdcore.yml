@@ -42,7 +42,7 @@
   - name: Add config nginx.service 
     template:
        src: ./default.conf.j2
-       dest: /etc/nginx/sites-enabled/default
+       dest: /etc/nginx/sites-available/default
     notify: Restart nginx.service  
 
   - name: Add config mariadb.service disable strict mode
