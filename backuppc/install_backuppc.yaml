@@ -38,5 +38,5 @@
   - name: Restart backuppc.service
     service: name=backuppc.service state=restarted
   - name: Restart backuppc.service
-    service: nameapache2.service state=restarted
+    service: name=apache2.service state=restarted
 
