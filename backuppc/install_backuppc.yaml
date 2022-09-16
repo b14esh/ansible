@@ -35,11 +35,11 @@
       mode: 0640
 
   handlers:
-  - name: Restart backuppc.service
-    service: 
+   - name: Restart backuppc.service
+     service: 
         name:
            - backuppc.service
            - apache2.service
-    state: restarted
+        state: restarted
 
 
