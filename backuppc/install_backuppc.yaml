@@ -21,7 +21,9 @@
     notify: Restart backuppc.service
 
   - name: Make sure we can use htpasswd module
-    apt: "pkg=python-passlib state=installed"
+    apt: 
+      name: python-passlib 
+      state: present
 
   - name: Add a user to a password file and ensure permissions are set
     community.general.htpasswd:
