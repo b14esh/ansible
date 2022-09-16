@@ -14,11 +14,11 @@
      name: backuppc 
      state: present
 
-  - name: Add config backuppc apache
+  - name: Add config backuppc 
     template:
        src: ./backuppc.conf.j2
        dest: /etc/backuppc/apache.conf
-    notify: Restart backuppc
+    notify: Restart backuppc.service
 
   - name: Add a user to a password file and ensure permissions are set
     community.general.htpasswd:
@@ -31,4 +31,4 @@
 
   handlers:
   - name: Restart backuppc.service
-    service: name=backuppc.service state=restarted      
+    service: name=backuppc.service state=restarted
