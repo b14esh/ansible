@@ -23,8 +23,8 @@
 - name: Add a user to a password file and ensure permissions are set
   community.general.htpasswd:
     path: /etc/backuppc/htpasswd
-    name: {{ backuppc_user }}
-    password: {{ backuppc_password }}
+    name: "{{ backuppc_user }}"
+    password: "{{ backuppc_password }}"
     owner: backuppc
     group: www-data
     mode: 0640
