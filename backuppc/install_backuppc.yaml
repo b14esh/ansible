@@ -20,15 +20,15 @@
        dest: /etc/backuppc/apache.conf
     notify: Restart backuppc
 
-- name: Add a user to a password file and ensure permissions are set
-  community.general.htpasswd:
-    path: /etc/backuppc/htpasswd
-    name: "{{ backuppc_user }}"
-    password: "{{ backuppc_password }}"
-    owner: backuppc
-    group: www-data
-    mode: 0640
-    
+  - name: Add a user to a password file and ensure permissions are set
+    community.general.htpasswd:
+      path: /etc/backuppc/htpasswd
+      name: "{{ backuppc_user }}"
+      password: "{{ backuppc_password }}"
+      owner: backuppc
+      group: www-data
+      mode: 0640
+
   handlers:
   - name: Restart backuppc.service
     service: name=backuppc.service state=restarted      
