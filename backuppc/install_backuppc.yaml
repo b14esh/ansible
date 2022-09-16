@@ -20,6 +20,9 @@
        dest: /etc/backuppc/apache.conf
     notify: Restart backuppc.service
 
+  - name: Make sure we can use htpasswd module
+    apt: "pkg=python-passlib state=installed"
+
   - name: Add a user to a password file and ensure permissions are set
     community.general.htpasswd:
       path: /etc/backuppc/htpasswd
