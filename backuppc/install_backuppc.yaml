@@ -1,0 +1,22 @@
+---
+- hosts: all
+  become: yes
+  
+  tasks:
+  - name: Cheack and Print Linux Version
+    debug: var=ansible_os_family
+
+  - name: Install "backuppc from repository" package
+    apt:
+     name: backuppc 
+     state: present
+
+#  - name: Add config backuppc agent
+#    template:
+#       src: ./backuppc.conf.j2
+#       dest: /etc/backuppc.conf
+#    notify: Restart backuppc   
+
+#  handlers:
+#  - name: Restart zabbix-agent
+#    service: name=zabbix-agent state=restarted      

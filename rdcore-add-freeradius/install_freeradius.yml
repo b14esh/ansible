@@ -18,6 +18,7 @@
     debug: var=ansible_os_family
     
 #Please check your /WWW_ROOT/cake3/rd_cake/logs/error.log for error details
+# https://github.com/RADIUSdesk/rdcore/wiki/Installing-FreeRADIUS-version-3.x-on-Ubuntu-20.04
 
   - name: Install a list of packages
     apt:
@@ -41,13 +42,13 @@
   - name: Move foo to bar
     command: mv /etc/freeradius /etc/freeradius.orig
     when: foo_stat.stat.exists 
- 
+
   - name: Unarhive file freeradius-3-radiusdesk.tar.gz
     unarchive:
       src:  /var/www/rdcore/cake4/rd_cake/setup/radius/freeradius-3-radiusdesk.tar.gz
       dest: /etc/freeradius/3.0
       remote_src: yes  
-      
+
   - name: Recursively change ownership of a directory freeradius
     ansible.builtin.file:
       path: /etc/freeradius/3.0
@@ -55,13 +56,13 @@
       recurse: yes
       owner: freerad
       group: freerad
-     
+
   - name: Create a directory if it does not exist freeradius
     ansible.builtin.file:
       path: /var/run/freeradius
       state: directory
       mode: '0755'   
-  
+
   - name: Recursively change ownership of a directory freeradius
     ansible.builtin.file:
        path: /var/run/freeradius
@@ -75,7 +76,7 @@
     
   - name: Copy file freeradius.service to Servers
     copy: src={{ source_file_fd }} dest={{ destin_file_fd }} mode=0600 owner=freerad group=freerad backup=no
-    
+
   - name: Restart service cron on centos, in all cases, also issue daemon-reload to pick up config changes
     ansible.builtin.systemd:
       state: restarted
