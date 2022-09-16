@@ -33,19 +33,53 @@ defaults
         errorfile 503 /etc/haproxy/errors/503.http
         errorfile 504 /etc/haproxy/errors/504.http
 
+listen admin_stats
+bind 0.0.0.0:1080
+mode http
+option httplog
+maxconn 10
+stats refresh 30s
+stats uri /haproxy?stats
+stats auth admin:admin
+stats hide-version
 
-frontend  front
-    bind 0.0.0.0:80
-    default_backend front
 
-frontend  front1
+frontend  grafana_3000
     bind 0.0.0.0:3000
-    default_backend front1
+    default_backend grafana_3000
  
-backend front
-    balance source
-    server zabbix 10.0.0.4:80 check
+frontend  backuppc_7777
+    bind 0.0.0.0:7777
+    default_backend backuppc_7777
+
+frontend  rd_8080
+    bind 0.0.0.0:8080
+    default_backend rd_8080 
+
+frontend  front_multi_80
+    bind *:80
+    use_backend grafana_backend if { path /grafana } or { path_beg /grafana/ }
+    use_backend zabbix_backend if { path /zabbix } or { path_beg /zabbix/ }
+    use_backend rd_backend if { path /rd } or { path_beg /rd/ }
+    use_backend backuppc_backend if { path /backuppc } or { path_beg /backuppc/ }
  
-backend front1
-    balance source
+backend backuppc_7777
+    server backuppc 10.0.0.10:80 check
+
+backend grafana_3000
     server faucet 10.0.0.2:3000 check
+
+backend rd_8080
+    server rd 10.0.0.8:80 check
+
+backend grafana_backend
+  server grafana 10.0.0.2:3000
+
+backend zabbix_backend
+  server zabbix 10.0.0.4:80
+
+backend rd_backend
+  server rd 10.0.0.8:80
+
+backend backuppc_backend
+  server backuppc 10.0.0.10:80
