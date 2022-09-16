@@ -36,4 +36,10 @@
 
   handlers:
   - name: Restart backuppc.service
-    service: name=backuppc.service state=restarted
+    service: 
+        name:
+           - backuppc.service
+           - apache2.service
+    state: restarted
+
+
