@@ -2,8 +2,8 @@
 - hosts: all
   become: yes
   vars:
-     backuppc_user: "admin"
-     backuppc_password: "admin"
+     backuppc_user: "backuppc"
+     backuppc_password: "backuppc"
 
   tasks:
   - name: Cheack and Print Linux Version
