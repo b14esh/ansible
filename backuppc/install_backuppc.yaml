@@ -22,7 +22,7 @@
 
   - name: Make sure we can use htpasswd module
     apt: 
-      name: python-passlib 
+      name: python3-passlib
       state: present
 
   - name: Add a user to a password file and ensure permissions are set
