@@ -15,30 +15,40 @@
     template:
        src: ./config/named.conf.local.j2
        dest: /etc/bind/named.conf.local
+       owner: root
+       group: bind
     notify: Restart bind9
 
   - name: Add config bind9 named.conf.options
     template:
        src: ./config/named.conf.options.j2
-       dest:  /etc/bind/named.conf.options
+       dest: /etc/bind/named.conf.options
+       owner: root
+       group: bind
     notify: Restart bind9
  
   - name: Create a directory if it does not exist /etc/bind/master
     ansible.builtin.file:
       path: /etc/bind/master
       state: directory
+      owner: root
+      group: bind
       mode: '0755'  
   
   - name: Add config bind9 10.0.0.in-addr.arpa.zone
     template:
        src: ./config/10.0.0.in-addr.arpa.zone.j2
        dest: /etc/bind/master/10.0.0.in-addr.arpa.zone
+       owner: root
+       group: bind
     notify: Restart bind9
  
   - name: Add config bind9 bord.inc.zone
     template:
        src: ./config/bord.inc.zone.j2
        dest: /etc/bind/master/bord.inc.zone
+       owner: root
+       group: bind
     notify: Restart bind9
  
   - name: Add config zabbix agent
