@@ -43,10 +43,10 @@
        group: bind
     notify: Restart bind9
  
-  - name: Add config bind9 bord.inc.zone
+  - name: Add config bind9 board.inc.zone
     template:
-       src: ./config/bord.inc.zone.j2
-       dest: /etc/bind/master/bord.inc.zone
+       src: ./config/board.inc.zone.j2
+       dest: /etc/bind/master/board.inc.zone
        owner: root
        group: bind
     notify: Restart bind9
