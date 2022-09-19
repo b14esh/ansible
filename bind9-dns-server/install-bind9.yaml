@@ -38,7 +38,7 @@
   - name: Add config bind9 bord.inc.zone
     template:
        src: ./config/bord.inc.zone.j2
-       dest: /etc/bind/master/bord.inc..zone.j2
+       dest: /etc/bind/master/bord.inc.zone
     notify: Restart bind9
  
   - name: Add config zabbix agent
