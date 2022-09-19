@@ -29,13 +29,13 @@
       state: directory
       mode: '0755'  
   
-  - name: Add config bind9 10.0.0.0.in-addr.arpa.zone
+  - name: Add config bind9 10.0.0.in-addr.arpa.zone
     template:
-       src: ./config/10.0.0.0.in-addr.arpa.zone.j2
-       dest: /etc/bind/master/10.0.0.0.in-addr.arpa.zone
+       src: ./config/10.0.0.in-addr.arpa.zone.j2
+       dest: /etc/bind/master/10.0.0.in-addr.arpa.zone
     notify: Restart bind9
  
-  - name: Add config bind9 10.0.0.0.in-addr.arpa.zone
+  - name: Add config bind9 bord.inc.zone
     template:
        src: ./config/bord.inc.zone.j2
        dest: /etc/bind/master/bord.inc..zone.j2
