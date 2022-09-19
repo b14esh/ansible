@@ -35,10 +35,10 @@
       group: bind
       mode: '0755'  
   
-  - name: Add config bind9 10.0.0.in-addr.arpa.zone
+  - name: Add config bind9 0.0.10.in-addr.arpa.zone
     template:
-       src: ./config/10.0.0.in-addr.arpa.zone.j2
-       dest: /etc/bind/master/10.0.0.in-addr.arpa.zone
+       src: ./config/0.0.10.in-addr.arpa.zone.j2
+       dest: /etc/bind/master/0.0.10.in-addr.arpa.zone
        owner: root
        group: bind
     notify: Restart bind9
