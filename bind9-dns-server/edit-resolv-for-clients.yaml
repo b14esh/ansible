@@ -6,7 +6,7 @@
   - name: Cheack and Print Linux Version
     debug: var=ansible_os_family
 
-  - name: Add config zabbix agent
+  - name: Add config /etc/resolv.conf
     template:
        src: ./config/client-resolv.j2
        dest: /etc/resolv.conf
