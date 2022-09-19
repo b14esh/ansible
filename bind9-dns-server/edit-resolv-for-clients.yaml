@@ -1,0 +1,12 @@
+---
+- hosts: nsclients
+  become: yes
+  
+  tasks:
+  - name: Cheack and Print Linux Version
+    debug: var=ansible_os_family
+
+  - name: Add config zabbix agent
+    template:
+       src: ./config/client-resolv.j2
+       dest: /etc/resolv.conf
