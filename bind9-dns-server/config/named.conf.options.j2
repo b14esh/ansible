@@ -1,13 +1,48 @@
-options {
-directory "/var/cache/bind";
- 
-forwarders {
-10.0.0.1;
-};
+ acl "acl_trusted_transfer" {
+      none;
+ };
 
-//dnssec-validation auto; 
-//dnssec-enable yes;
-//dnssec-validation yes; 
-auth-nxdomain no; # conform to RFC1035
-listen-on-v6 {none; };
+ acl "acl_trusted_clients" {
+     127.0.0.0/8;            // localhost (RFC 3330) - Loopback-Device addresses    127.0.0.0 - 127.255.255.255  
+     // 192.168.0.0/16;     // Private Network (RFC 1918) - e. e. LAN              192.168.0.0 - 192.168.255.255 
+     10.0.0.0/24;          // Private Network (RFC 1918) - e. g. VPN              10.0.0.0 - 10.255.255.255
+ };
+
+options {
+        directory "/var/cache/bind";
+        pid-file "/var/run/named/named.pid";
+        version "not currently available"; 
+        listen-on-v6 { none; };
+        listen-on { any; };
+        notify no;
+
+        allow-query { acl_trusted_clients; };
+        allow-query-cache { acl_trusted_clients; };
+        allow-recursion { acl_trusted_clients; };
+        allow-transfer {  none; };
+        allow-update { none; };
+        
+        dnssec-validation yes;
+        auth-nxdomain no; # conform to RFC1035
+
+        empty-zones-enable yes;
+        
+        recursion yes;
+        
+        //additional-from-auth no;
+        //additional-from-cache no;
+        
+        forwarders {
+                // Router DNS
+                10.0.0.1;
+
+                // Google Public DNS
+                //8.8.8.8;
+                //8.8.4.4;
+ 
+                // OpenDNS
+                //208.67.222.222;
+                //208.67.220.220;
+                   };
+
 };
