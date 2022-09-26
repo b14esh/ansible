@@ -1,0 +1,23 @@
+0. используем скрипты adddovecotuser
+adddovecotuser user_name - создает пользователя user_name и mkdovecotpasswd 
+mkdovecotpasswd user_name password123 - задает пользователю user_name с паролям password123
+
+примеры: 
+adddovecotuser root@board.inc
+mkdovecotpasswd root@board.inc  pass1
+ 
+adddovecotuser info@board.inc
+mkdovecotpasswd info@board.inc pass2
+
+adddovecotuser admin@board.inc
+mkdovecotpasswd admin@board.inc pass3
+ 
+1. Защитите файл пароля:
+chmod 640 /etc/dovecot/passwd
+ 
+2. Перезапустим dovecot и  postfix
+/etc/init.d/postfix restart
+/etc/init.d/dovecot restart
+
+4. консольный почтовый клиент 
+mutt
