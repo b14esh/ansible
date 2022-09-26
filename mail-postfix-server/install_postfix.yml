@@ -15,8 +15,8 @@
      destin_file_adddovecotuser: /usr/local/sbin/adddovecotuser
      source_file_mkdovecotpasswd: ./config/mkdovecotpasswd
      destin_file_mkdovecotpasswd: /usr/local/sbin/mkdovecotpasswd
-     source_file_HINT-POSTFIX: ./config/HINT-POSTFIX
-     destin_file_HINT-POSTFIX: /root/HINT-POSTFIX
+     source_file_hint_postfix: ./config/HINT-POSTFIX
+     destin_file_hint_postfix: /root/HINT-POSTFIX
      
   tasks:
   - name: Install a list of packages
@@ -67,7 +67,7 @@
     copy: src={{ source_file_mkdovecotpasswd }} dest={{ destin_file_mkdovecotpasswd }} mode=0740 owner=root group=root backup=no
 
   - name: Copy file HINT-POSTFIX to Server
-    copy: src={{ source_file_HINT-POSTFIX }} dest={{ destin_file_HINT-POSTFIX }} mode=0640 owner=root group=root backup=no
+    copy: src={{ source_file_hint_postfix }} dest={{ destin_file_hint_postfix }} mode=0640 owner=root group=root backup=no
     
   handlers:
   - name: restart postfix 
