@@ -7,6 +7,8 @@
      destin_file_pmcf: /etc/postfix/main.cf
      source_file_dovecot: ./config/dovecot.conf.j2
      destin_file_dovecot: /etc/dovecot/dovecot.conf
+     source_file_dpasswd: ./config/dovcot-passwd
+     destin_file_dpasswd: /etc/dovecot/passwd
      source_file_pvhosts: ./config/vhosts.j2
      destin_file_pvhosts: /etc/postfix/vhosts
      source_file_pvmaps: ./config/vmaps.j2
@@ -50,9 +52,13 @@
     copy: src={{ source_file_pmcf }} dest={{ destin_file_pmcf }} mode=0644 owner=root group=root backup=yes
     notify: restart postfix
     
+  - name: Copy file dpasswd to Server
+    copy: src={{ source_file_dpasswd }} dest={{ destin_file_dpasswd }} mode=0640 owner=root group=dovecot backup=yes 
+    notify: restart dovecot  
+  
   - name: Copy file dovecot to Server
     copy: src={{ source_file_dovecot }} dest={{ destin_file_dovecot }} mode=0644 owner=root group=root backup=yes 
-    notify: restart dovecot  
+    notify: restart dovecot      
 
   - name: Copy file pvhosts to Server
     copy: src={{ source_file_pvhosts }} dest={{ destin_file_pvhosts }} mode=0644 owner=root group=root backup=yes 
