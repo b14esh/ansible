@@ -27,6 +27,7 @@
         - dovecot-imapd
         - dovecot-pop3d
         - libstring-mkpasswd-perl
+        - whois
       state: latest
       update_cache: True
       
