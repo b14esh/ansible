@@ -27,3 +27,40 @@ mkpasswd
 
 6. генератор паролей
 mkpasswd.pl
+
+
+
+
+7. Проверка postfix
+nc localhost 25 - подключаемся локально
+helo localhost - представляемся
+mail from: <root@localhost> - пишем письмо от пользователю root@localhost
+rcpt to:<root@board.inc> - пишем письмо пользователю root@board.inc
+data - начинаем передачу данных
+354 End data with <CR><LF>.<CR><LF> - ответ сервера, в конце данных просит указать пустую строку с точкой
+helo helolllo 1234 !!!! - наши данные
+.
+quit - отключаемся от сервера
+
+
+
+8. Проверка dovecot
+ss -tpln | grep dovecot
+pgrep dovecot
+lsof -i tcp:143
+lsof -i tcp:110
+tail /var/log/dovecot
+tail /var/log/dovecot.info
+
+nc localhost 110 - подключаемся для проверки
+user root@board.inc
+pass pass1
+list
+retr 1
+dele 1
+
+9.
+postmap vmaps
+ 
+postalias /etc/aliases
+newaliases

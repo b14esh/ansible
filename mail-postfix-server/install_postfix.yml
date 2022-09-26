@@ -71,6 +71,15 @@
   - name: Copy file HINT-POSTFIX to Server
     copy: src={{ source_file_hint_postfix }} dest={{ destin_file_hint_postfix }} mode=0640 owner=root group=root backup=no
     
+  - name: Add user postfix and dovecot
+    shell: |
+      adddovecotuser root@board.inc
+      mkdovecotpasswd root@board.inc pass1
+      adddovecotuser info@board.inc
+      mkdovecotpasswd info@board.inc pass1
+      adddovecotuser admin@board.inc
+      mkdovecotpasswd admin@board.inc pass1
+    
   handlers:
   - name: restart postfix 
     service: name=postfix.service state=restarted
