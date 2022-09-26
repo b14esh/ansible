@@ -26,6 +26,7 @@
         - mailutils
         - dovecot-imapd
         - dovecot-pop3d
+        - libstring-mkpasswd-perl
       state: latest
       update_cache: True
       
