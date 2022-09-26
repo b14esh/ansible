@@ -85,6 +85,9 @@
       mkdovecotpasswd info@board.inc pass1
       adddovecotuser admin@board.inc
       mkdovecotpasswd admin@board.inc pass1
+      chmod +x /home/vmail -R 
+      chown vmail.vmail /home/vmail -R
+
     
   handlers:
   - name: restart postfix 
