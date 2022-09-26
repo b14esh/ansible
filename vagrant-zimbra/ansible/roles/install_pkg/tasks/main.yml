@@ -1,0 +1,9 @@
+---
+# tasks file for install_pkg
+- name: Install a list of packages
+  apt:
+    pkg:
+     - libreoffice
+     - git
+     - wget
+     - curl

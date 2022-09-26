@@ -1,0 +1,76 @@
+---
+- name: Install postfix server 
+  hosts: all
+  become: yes
+  vars:
+     source_file_pmcf: ./config/postfix-main.cf.j2
+     destin_file_pmcf: /etc/postfix/main.cf
+     source_file_dovecot: ./config/dovecot.conf.j2
+     destin_file_dovecot: /etc/dovecot/dovecot.conf
+     source_file_pvhosts: ./config/vhosts.j2
+     destin_file_pvhosts: /etc/postfix/vhosts
+     source_file_pvmaps: ./config/vmaps.j2
+     destin_file_pvmaps: /etc/postfix/vmaps
+     source_file_adddovecotuser: ./config/adddovecotuser
+     destin_file_adddovecotuser: /usr/local/sbin/adddovecotuser
+     source_file_mkdovecotpasswd: ./config/mkdovecotpasswd
+     destin_file_mkdovecotpasswd: /usr/local/sbin/mkdovecotpasswd
+     
+  tasks:
+  - name: Install a list of packages
+    apt:
+      pkg:
+        - postfix
+        - mailutils
+        - dovecot-imapd
+        - dovecot-pop3d
+      state: latest
+      update_cache: True
+      
+  - name: Ensure group "vmail" exists
+    ansible.builtin.group:
+      name: vmail
+      state: present
+      gid: 5000
+
+  - name: Add the user 'vmail' with a specific uid and a primary group of 'vmail'
+    ansible.builtin.user:
+      name: vmail
+      shell: /bin/bash
+      home: /home/vmail
+      comment: vmail
+      uid: 5000
+      group: vmail
+      
+  - name: Copy file pmcf to Server
+    copy: src={{ source_file_pmcf }} dest={{ destin_file_pmcf }} mode=0644 owner=root group=root backup=yes
+    notify: restart postfix
+    
+  - name: Copy file dovecot to Server
+    copy: src={{ source_file_dovecot }} dest={{ destin_file_dovecot }} mode=0644 owner=root group=root backup=yes 
+    notify: restart devecot  
+
+  - name: Copy file pvhosts to Server
+    copy: src={{ source_file_pvhosts }} dest={{ destin_file_pvhosts }} mode=0644 owner=root group=root backup=yes 
+    notify: restart postfix      
+
+  - name: Copy file pvmaps to Server
+    copy: src={{ source_file_pvmaps }} dest={{ destin_file_pvmaps }} mode=0644 owner=root group=root backup=yes 
+    notify: edit vmaps      
+
+  - name: Copy file adddovecotuser to Server
+    copy: src={{ source_file_adddovecotuser }} dest={{ destin_file_adddovecotuser }} mode=0740 owner=root group=root backup=no
+    
+  - name: Copy file mkdovecotpasswd to Server
+    copy: src={{ source_file_mkdovecotpasswd }} dest={{ destin_file_mkdovecotpasswd }} mode=0740 owner=root group=root backup=no
+
+
+  handlers:
+  - name: restart postfix 
+    service: name=postfix.service state=restarted
+  - name: edit vmaps 
+    shell: postmap /etc/postfix/vmaps && newaliases
+  - name: edit vmaps 
+    service: name=postfix.service state=restarted
+  - name: restart devecot 
+    service: name=devecot.service state=restarted    

@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: false
+
+  roles:
+      - install_update
+      - install_pkg
+      - install_zimbra  
+...

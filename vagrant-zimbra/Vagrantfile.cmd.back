@@ -1,0 +1,76 @@
+#https://zimbra.github.io/zimbra-9/single-server-install.html
+#https://www.zimbra.com/downloads/
+#https://www.zimbra.com/support/
+
+
+Vagrant.configure("2") do |config|
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+  config.vm.disk :disk, size: "10GB", primary: true
+
+  config.vm.box = "generic/ubuntu1804"
+  
+  config.vm.hostname = "test.local"
+
+  config.vm.provider "libvirt" do |domain|
+    domain.memory = "1024"
+    domain.cpus = "1"
+   end
+  
+  config.vm.provision "shell", inline: <<-SHELL
+       #doc https://zimbra.github.io/zimbra-9/single-server-install.html
+       apt-get update 
+       apt-get upgrade -y 
+       apt-get install libreoffice git wget curl -y 
+       cd /opt
+       ### https://files.zimbra.com/downloads/9.0.0_GA/zcs-NETWORK-9.0.0_GA_3924.RHEL7_64.20200331010312.tgz
+       ### https://files.zimbra.com/downloads/9.0.0_GA/zcs-NETWORK-9.0.0_GA_3954.RHEL8_64.20200629045300.tgz
+       # wget https://files.zimbra.com/downloads/9.0.0_GA/zcs-NETWORK-9.0.0_GA_3924.UBUNTU18_64.20200331010312.tgz
+       # wget download.zextras.com/zcs-9.0.0_OSE_RHEL8_latest-zextras.tgz
+       wget download.zextras.com/zcs-9.0.0_OSE_UBUNTU18_latest-zextras.tgz -o download.log
+       tar -xf zcs-9.0.0_OSE_UBUNTU18_latest-zextras.tgz 
+       ########### POST INSTALL
+       # https://<IP-адрес сервера>:7071 
+       ### cd zcs-9.0.0_OSE_UBUNTU18_latest-zextras
+       ### ./install.sh
+       # zimbra cache dns = maibe deletet
+       ### $myhostname=test.local
+       # su zimbra
+       # zmprov getServer '$myhostname' | grep DNSMasterIP
+       # zmprov ms '$myhostname' -zimbraDNSMasterIP 127.0.0.53
+       # zmprov ms '$myhostname' +zimbraDNSMasterIP  192.168.1.1
+       # zmprov ms '$myhostname' +zimbraDNSMasterIP  8.8.8.8 
+       # zmprov ms $myhostname zimbraMtaLmtpHostLookup native
+       # zmprov mcf zimbraMtaLmtpHostLookup native
+       ### Allow IP sent 
+       # zmprov ms test.local  zimbraMtaMyNetworks "127.0.0.0/8 192.168.1.15/32
+       # postfix reload
+       # postconf mynetworks
+       #### spam
+       # /opt/zimbra/conf/amavisd.conf.in
+       # zmamavisdctl stop && zmamavisdctl start
+       #### size mail 
+       # zmprov modifyConfig zimbraMtaMaxMessageSize 31457280
+       # postfix reload
+       ### DKIP
+       ### /opt/zimbra/libexec/zmdkimkeyutil -a -d test.local
+       ## enter YOU PROVIDDER DNS
+       #####TEST DKIP
+       # opendkim-testkey -d dmosk.ru -s 5D8C3E02-4EFA-11EA-872A-D9A5B4628C49 -x /opt/zimbra/conf/opendkim.conf
+       # opt/zimbra/libexec/zmdkimkeyutil -q -d test.local
+       #### SSL Letsencrypt
+       #cd opt
+       #git clone https://github.com/letsencrypt/letsencrypt
+       #/opt/letsencrypt/letsencrypt-auto certonly --standalone 
+       ### Disable antispam antivirus amavis
+       # zmprov -l ms test.local -zimbraServiceEnabled antispam 
+       # zmprov -l ms test.local -zimbraServiceEnabled antivirus 
+       # zmprov -l ms test.local -zimbraServiceEnabled amavis
+       # zmcontrol restart
+       # zmprov -l gs test.local | egrep -i 'serviceen|servicein' 
+       ### EDIT COMMENT SRING 
+       ## vim /opt/zimbra/common/conf/main.cf
+       ### content_filter = smtp-amavis:[127.0.0.1]:10024 
+  SHELL
+ 
+
+end

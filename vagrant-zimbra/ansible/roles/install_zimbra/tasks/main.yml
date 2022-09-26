@@ -1,0 +1,20 @@
+---
+# tasks file for install_zimbra
+- name: Download zimbra
+  get_url:
+       url: https://download.zextras.com/zcs-9.0.0_OSE_UBUNTU18_latest-zextras.tgz
+       dest: /opt
+       mode: '0600'
+
+- name: Create a directory if it does not exist
+  ansible.builtin.file:
+    path: /opt/zimbra-installer
+    state: directory
+    mode: '0755'
+
+- name: Unarhive zimbra
+  unarchive:
+      src: /opt/zcs-9.0.0_OSE_UBUNTU18_latest-zextras.tgz
+      dest: /opt/zimbra-installer
+      remote_src: yes 
+         
