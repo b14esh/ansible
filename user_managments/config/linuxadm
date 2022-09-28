@@ -1,0 +1,2 @@
+#--# Linux administrators
+%linuxadm ALL=(ALL) NOPASSWD: ALL

@@ -1,0 +1,39 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: false
+  vars:
+       source_file_group_sudo: ./FILE_SUDO
+       destin_file_group_sudo: /etc/sudoers.d/FILE_SUDO
+       user_name: USERNAME
+       user_key_pub: USERKEY.pub  
+       user_password: USER_HESH_PASSWORD
+       user_groups_debian: sudo,ADD_GROUP
+       user_groups_centos: wheel,ADD_GROUP
+       add_group: ADD_NEW_GROUP
+
+  tasks:
+  
+  - name: Add a group called 
+    group:
+       name: "{{ add_group }}"
+       state: present
+
+  - name: Cheack and Print Linux Version
+    debug: var=ansible_os_family
+
+  - name: Copy file zxc to Servers
+    copy: src={{ source_file_group_sudo }} dest={{ destin_file_group_sudo }} mode=0555
+
+  - name: Add user to remote hosts
+    user: name={{ user_name }} groups={{ user_groups_debian }} shell=/bin/bash password={{ user_password }}
+    when: ansible_os_family == "Debian"
+ 
+  - name: Add user to remote hosts
+    user: name={{ user_name }} groups={{ user_groups_centos }} shell=/bin/bash password={{ user_password }}
+    when: ansible_os_family == "RedHat"
+ 
+  - name: Add SSH keys to remote hosts
+    authorized_key: user={{ user_name }} key="{{ lookup('file', "{{ user_key_pub }}") }}"
+
+...

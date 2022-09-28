@@ -1,0 +1,15 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: no
+
+  vars_prompt:
+  - name: "user_to_del"
+    prompt: "Username to delete? "
+    private: no
+
+  tasks:
+  - name: delete {{ user_to_del }} from servers with keep homedir
+    user: name={{ user_to_del }} state=absent
+    register: task
+

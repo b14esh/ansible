@@ -1,0 +1,3 @@
+#--# VoIP tech support
+Cmnd_Alias VOIPUSER=/usr/local/sbin/aps, /usr/local/sbin/aps1, /usr/bin/ngrep *, /usr/bin/sngrep *
+%voipuser ALL=(ALL) NOPASSWD: VOIPUSER

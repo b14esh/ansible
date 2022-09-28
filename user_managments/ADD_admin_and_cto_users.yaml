@@ -1,0 +1,56 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: false
+  vars:
+       source_file_sudoers: ./sudoers
+       destin_file_sudoers: /etc/sudoers
+       source_file_linuxadm: ./cto
+       destin_file_linuxadm: /etc/sudoers.d/cto
+       source_file_cto: ./linuxadm
+       destin_file_cto: /etc/sudoers.d/linuxadm
+       
+ 
+  tasks:
+  - name: Install "sudo from repository" package
+    apt:
+     name: sudo 
+     state: present
+     
+  - name: Add a group called cto
+    group:
+       name:  cto
+       state: present
+
+  - name: Add a group called linuxadm
+    group:
+      name: linuxadm
+      state: present   
+      
+  - name: Add a group called voip
+    group:
+      name: voip
+      state: present    
+
+  - name: Add user ansible to remote hosts #for test ansible:ansible
+    user: name=ansible groups=sudo,linuxadm shell=/bin/bash password=$y$j9T$YmUfElcsOx83hZqIvrFWj0$7Fy1rYsXmrbcK/IsFAGZPUElJc5Hh3FSrjXkfg9O/Q.
+
+  - name: Add SSH keys ansibble to remote hosts
+    authorized_key: user=ansible  key="{{ lookup('file', "./config/ansible/id_rsa.pub")}}"
+  
+  - name: Add user admin to remote hosts # for test admin:admin
+    user: name=admin groups=sudo,cto shell=/bin/bash password=$y$j9T$Q/eSua8Mi87i1wD1dA8hQ/$b8aXJVnzxpJmIrl9BR.CzUuzsBe2PKEdyE7H0QIvSL/
+  
+  - name: Add SSH keys ansible to remote hosts
+    authorized_key: user=admin  key="{{ lookup('file', "./config/admin/id_rsa.pub")}}"  
+  
+  - name: Copy file sudoers to Servers
+    copy: src={{ source_file_sudoers }} dest={{ destin_file_sudoers }} mode=0700  
+
+  - name: Copy file cto to Servers
+    copy: src={{ source_file_cto }} dest={{ destin_file_cto }} mode=0555
+ 
+  - name: Copy file linuxadm to Servers
+    copy: src={{ source_file_linuxadm }} dest={{ destin_file_linuxadm }} mode=0555
+  
+...

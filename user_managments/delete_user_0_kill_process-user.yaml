@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: yes
+
+  vars_prompt:
+  - name: "kill_proccess_user"
+    prompt: "Enter user name for kill proccess "
+    private: no
+
+  tasks:       
+  - shell: "pkill -u {{ kill_proccess_user }} "
+    ignore_errors: true # In case there is no proces
+    register: task
