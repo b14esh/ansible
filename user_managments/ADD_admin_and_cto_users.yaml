@@ -3,11 +3,11 @@
   become: yes
   gather_facts: false
   vars:
-       source_file_sudoers: ./sudoers
+       source_file_sudoers: ./config/sudoers
        destin_file_sudoers: /etc/sudoers
-       source_file_linuxadm: ./cto
+       source_file_linuxadm: ./config/cto
        destin_file_linuxadm: /etc/sudoers.d/cto
-       source_file_cto: ./linuxadm
+       source_file_cto: ./config/linuxadm
        destin_file_cto: /etc/sudoers.d/linuxadm
        
  

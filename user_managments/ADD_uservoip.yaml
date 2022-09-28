@@ -2,7 +2,7 @@
 - hosts: voipuser
   become: yes
   vars:
-       source_file_cto: ./voipuser
+       source_file_cto: ./config/voipuser
        destin_file_cto: /etc/sudoers.d/voipuser
   
   tasks:
@@ -23,4 +23,4 @@
 #    when: ansible_os_family == "RedHat"
  
   - name: Add SSH keys to remote hosts
-    authorized_key: user=ea key="{{ lookup('file', "./x_users/voipuserk/id_rsa.pub") }}"
+    authorized_key: user=ea key="{{ lookup('file', "./config/voipuserk/id_rsa.pub") }}"
