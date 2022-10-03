@@ -1,0 +1,32 @@
+---
+- name: Install logwatch
+  hosts: all
+  become: yes
+  
+  tasks:
+  - name: Cheack and Print Linux Version
+    debug: var=ansible_os_family
+
+  - name: Install "logwatch from repository" package
+    apt:
+     name: logwatch 
+     state: present
+
+  - name: Add config aliases
+    template:
+       src: ./config/aliases.j2
+       dest: /etc/aliases
+    notify: reload-aliases
+
+  - name: Add config aliases
+    template:
+       src: ./config/aliases.j2
+       dest: /etc/cron.daily/00logwatch 
+    notify: Restart logwatch
+
+
+  handlers:
+  - name: reload-aliases
+    shell: newaliases
+  - name: Restart logwatch
+    service: name=logwatch state=restarted 
