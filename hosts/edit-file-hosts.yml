@@ -1,0 +1,10 @@
+---
+- name: edit hosts
+  hosts: all
+  become: yes
+  
+  tasks:
+  - name: Edit file 
+    template:
+       src: ./config/hosts.j2
+       dest: /etc/hosts
