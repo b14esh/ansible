@@ -23,15 +23,15 @@
        src: ./config/00logwatch.j2
        dest: /etc/cron.daily/00logwatch 
  
- - name: Install "postfix from repository" package
+  - name: Install "postfix from repository" package
     apt:
-     name: postfix 
-     state: present
+      name: postfix 
+      state: present
 
- - name: Add config crond logwatch
-   template:
-       src: ./config/main.cf.j2
-       dest: /etc/postfix/main.cf
+  - name: Add config crond logwatch
+    template:
+        src: ./config/main.cf.j2
+        dest: /etc/postfix/main.cf
     notify: Restart postfix
     
   handlers:
