@@ -20,13 +20,9 @@
 
   - name: Add config aliases
     template:
-       src: ./config/aliases.j2
+       src: ./config/00logwatch.j2
        dest: /etc/cron.daily/00logwatch 
-    notify: Restart logwatch
-
 
   handlers:
   - name: reload-aliases
     shell: newaliases
-  - name: Restart logwatch
-    service: name=logwatch state=restarted 
