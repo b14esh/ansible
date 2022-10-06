@@ -23,4 +23,4 @@
 #    when: ansible_os_family == "RedHat"
  
   - name: Add SSH keys to remote hosts
-    authorized_key: user=ea key="{{ lookup('file', "./config/voipuserk/id_rsa.pub") }}"
+    authorized_key: user=voipuser key="{{ lookup('file', "./config/voipuserk/id_rsa.pub") }}"

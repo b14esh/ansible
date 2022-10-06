@@ -16,4 +16,4 @@
     when: ansible_os_family == "Debian"
   
   - name: Add SSH keys to remote hosts
-    authorized_key: user=ea key="{{ lookup('file', "./config/git/id_rsa.pub") }}"
+    authorized_key: user=git key="{{ lookup('file', "./config/git/id_rsa.pub") }}"
