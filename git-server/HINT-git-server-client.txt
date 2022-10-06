@@ -20,54 +20,7 @@ git init --bare
 !!! запомнили путь до репозитори€ права€ часть в примере "/home/git/my_projects.git/" пригодитс€
 ---------------------
 
- лиент:
- лиентска€ часть дл€ linux \ debian
-
-0. ”станавливаем git
-apt install git
-
-1. ѕервым дело создаем каталог дл€ локального репозитори€
-mkdir my_projects
-
-2. ¬ходим в него и производим первичную настройку
-cd my_projects
-git init
-git config --global user.name "Vasya Pupkin"
-git config --global user.email "ваш@почтовый.€щик"
-
-3. —оздаем какой ни будь файл дл€ проверки в каталоге my_projects
-echo "xxxx" > file.txt  
-
-4. ¬ыполн€ем 
-git add .
-git commit -m 
-
-5. √енерируем пару ключей закрытый\открытый. (в gitbash)
-ssh-keygen.exe
-
-6.  опируем его на сервер (gitbash) (потребуетс€ ввести пароль пользовател€ git)
-!!! ќбратите внимание что нужно указать правильное им€ и правильный  ip или DNS-им€
-ssh-copy-id git@10.0.0.5
-
-7. Ќастраиваем само подключение к серверу git
-git remote add origin git@10.0.0.5:/home/git/my_projects.git
-
-8. Ќу собственно провер€ем залив наши файлы на репозиторий 
-git push origin master
-
-----------------------
-
-–азовое клонирование репозитори€(в примере тот же пк другой пользователь)
-
-git clone git@localhost:/home/git/my_projects.git/
-
-–епозиторий будет доступен дл€ чтени€, что бы получить возможность "git push origin master": 
-git config --global user.name "Vasya Pupkin" 
-git config --global user.email "ваш@почтовый.€щик"
-git remote add origin git@10.0.0.5:/home/git/my_projects.git
-
-----------------------
-ѕример работы удаленных пользователей git:
+ѕример работы удаленных пользователей  с существующем репозиторием:
 
 0. „то бы не плодить пользователей в системе, 
    на сервере можно добавить публичные ключи других пользователей, 
@@ -91,3 +44,5 @@ git add.
 git commit -m "YOU COMMIT"
 git log
 checkout
+
+----------------------
