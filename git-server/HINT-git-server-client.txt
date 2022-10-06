@@ -47,10 +47,10 @@ ssh-keygen.exe
 
 6.  опируем его на сервер (gitbash) (потребуетс€ ввести пароль пользовател€ git)
 !!! ќбратите внимание что нужно указать правильное им€ и правильный  ip или DNS-им€
-ssh-copy-id git@192.168.1.15
+ssh-copy-id git@10.0.0.5
 
 7. Ќастраиваем само подключение к серверу git
-git remote add origin git@192.168.1.15:/srv/git/my_project.git
+git remote add origin git@10.0.0.5:/home/git/my_projects.git
 
 8. Ќу собственно провер€ем залив наши файлы на репозиторий 
 git push origin master
@@ -64,7 +64,7 @@ git clone git@localhost:/home/git/my_projects.git/
 –епозиторий будет доступен дл€ чтени€, что бы получить возможность "git push origin master": 
 git config --global user.name "Vasya Pupkin" 
 git config --global user.email "ваш@почтовый.€щик"
-git remote add origin git@192.168.1.15:/srv/git/my_project.git
+git remote add origin git@10.0.0.5:/home/git/my_projects.git
 
 ----------------------
 ѕример работы удаленных пользователей git:
@@ -75,7 +75,7 @@ git remote add origin git@192.168.1.15:/srv/git/my_project.git
    
 1. ќсновные команды:
  лонируем репозиторий:
-git clone git@server:/srv/git/automation.git
+git clone git@10.0.0.5:/home/git/my_projects.git
 ƒобавл€ем описание нашего пользовател€:
 git config --global user.name "Vasya Pupkin"
 git config --global user.email "ваш@почтовый.€щик"
