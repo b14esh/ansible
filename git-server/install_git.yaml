@@ -34,4 +34,4 @@
     shell: |
       cd /home/git/my_projects.git
       git init --bare
-      chown git.git /home/git/my_projects.git
+      chown git.git /home/git/my_projects.git -R
