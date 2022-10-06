@@ -1,0 +1,19 @@
+---
+- hosts: git
+  become: yes
+  
+  tasks:
+  - name: Cheack and Print Linux Version
+    debug: var=ansible_os_family
+
+  - name: Add a group called git
+    group:
+      name: git
+      state: present  
+
+  - name: Add user to remote hosts # for test password git:git123
+    user: name=git groups=git shell=/bin/bash password=$y$j9T$7WcFXbRjPkM/Wp6cO3gR91$3jrT1kV7JO2/SC5vjkqN0IOvmoM2094/pXlZ9nbc4XA
+    when: ansible_os_family == "Debian"
+  
+  - name: Add SSH keys to remote hosts
+    authorized_key: user=ea key="{{ lookup('file', "./config/git/id_rsa.pub") }}"

@@ -1,0 +1,36 @@
+---
+- name: Install git server
+  hosts: git
+  become: yes
+  vars:
+     git_password: "SEE USER MANAGMENT PLAYBOOK"
+     git_dirname: "my_projects.git"
+     
+  tasks:
+  - name: Cheack and Print Linux Version
+    debug: var=ansible_os_family
+
+  - name: Install "git-core from repository" package
+    apt:
+     name: git-core
+     state: present
+ 
+  - name: Install "git from repository" package
+    apt:
+     name: git
+     state: present
+     
+  - name: Create a directory my_projects.git it does not exist
+    ansible.builtin.file:
+      path: /home/git/my_projects.git
+      state: directory
+      recurse: yes
+      owner: git
+      group: git
+      mode: '0755'
+
+#https://docs.ansible.com/ansible/latest/collections/ansible/builtin/git_module.html
+  - name: Create repo my_projects.git
+    shell: |
+      cd /home/git/my_projects.git
+      git init --bare
