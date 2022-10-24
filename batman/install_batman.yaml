@@ -3,7 +3,7 @@
   hosts: all
   become: yes
   vars:
-    source_file_modules: ./config/modules
+    source_file_modules: ./config/modules.txt
     destin_file_modules: /etc/modules
   
   tasks:
@@ -23,14 +23,18 @@
     git:
       repo: 'https://github.com/open-mesh-mirror/batman-adv.git'
       dest: /opt/batman-adv
+      clone: yes
+      force: yes
       version: v2022.1
   
   - name: Clone git repo batctl
     git:
       repo: 'https://github.com/open-mesh-mirror/batctl.git'
       dest: /opt/batctl
+      clone: yes
+      force: yes
       version: v2022.1
-    
+
     
   - name: edit string
     shell: sed -i '/export/s/=n/=y/' /opt/batman-adv/Makefile  
