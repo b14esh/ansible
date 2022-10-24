@@ -39,6 +39,11 @@
   - name: edit string
     shell: sed -i '/export/s/=n/=y/' /opt/batman-adv/Makefile  
 
+  - name: Add the batman_adv module
+    community.general.modprobe:
+      name: batman_adv
+      state: absent
+
   - name: Run 'install' batman-adv
     make:
       chdir: /opt/batman-adv/
