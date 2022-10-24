@@ -47,12 +47,12 @@
   - name: Run 'install' batman-adv
     make:
       chdir: /opt/batman-adv/
-      target: install
+      target: all
 
   - name: Run 'install' batctl
     make:
       chdir: /opt/batctl/
-      target: install
+      target: all
 
 
   - name: Copy file modules to Servers
