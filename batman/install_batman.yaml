@@ -1,0 +1,55 @@
+---
+- name: Install Zabbix vesrion 6 on server Debian 11
+  hosts: all
+  become: yes
+  vars:
+    source_file_modules: ./config/modules
+    destin_file_modules: /etc/modules
+  
+  tasks:
+  - name: Install a list of packages
+    apt:
+      pkg:
+        - linux-headers-amd64
+        - git
+        - libnl-3-dev
+        - libnl-genl-3-dev 
+        - make
+        - gcc
+      state: present
+      update_cache: True
+      
+  - name: Clone git repo batman-adv
+    git:
+    repo: 'https://github.com/open-mesh-mirror/batman-adv.git'
+    dest: /opt/
+    version: v2022.1
+  
+  - name: Clone git repo batctl
+    git:
+    repo: 'https://github.com/open-mesh-mirror/batctl.git'
+    dest: /opt/
+    version: v2022.1
+    
+    
+  - name: edit string
+    shell: sed -i '/export/s/=n/=y/' /opt/batman-adv/Makefile  
+
+  - name: Run 'install' batman-adv
+    make:
+      chdir: /opt/batman-adv/
+      target: install
+
+  - name: Run 'install' batctl
+    make:
+      chdir: /opt/batctl/
+      target: install
+
+
+  - name: Copy file modules to Servers
+    copy: src={{ source_file_modules }} dest={{ destin_file_modules }} mode=0644 owner=root group=root backup=no
+    notify: SYS REBOOT
+
+  handlers:
+    - name: SYS REBOOT
+      shell: reboot
