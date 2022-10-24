@@ -22,13 +22,13 @@
   - name: Clone git repo batman-adv
     git:
       repo: 'https://github.com/open-mesh-mirror/batman-adv.git'
-      dest: /opt/
+      dest: /opt/batman-adv
       version: v2022.1
   
   - name: Clone git repo batctl
     git:
       repo: 'https://github.com/open-mesh-mirror/batctl.git'
-      dest: /opt/
+      dest: /opt/batctl
       version: v2022.1
     
     
