@@ -1,0 +1,38 @@
+# interfaces(5) file used by ifup(8) and ifdown(8)
+# Include files from /etc/network/interfaces.d:
+#source /etc/network/interfaces.d/*
+
+auto lo
+iface lo inet loopback
+
+auto wlan0
+iface wlan0 inet manual
+#    pre-up  /usr/sbin/iw dev wlan0 del
+#    pre-up  /usr/sbin/iw phy phy0 interface add wlan0 type ibss
+    pre-up /usr/sbin/batctl ra BATMAN_V
+    pre-up /usr/sbin/batctl if add wlan0
+    pre-up /usr/sbin/batctl gw server 
+#    pre-up /usr/sbin/batctl mff 1
+#    mtu 1532
+    wireless-channel 9
+    wireless-essid mesh
+    wireless-mode ad-hoc
+#    wireless-ap 2E:C8:1B:5D:A0:60
+
+auto bat0
+iface bat0 inet manual
+      mtu 1468
+
+auto br0
+iface br0 inet dhcp
+#      address 192.168.80.15/24
+#      gateway 192.168.80.1
+      bridge_ports bat0 eth0
+      bridge_stp off
+      bridge_hw b8:27:eb:19:e7:c1
+      post-up ip link set br0 address b8:27:eb:19:e7:c1
+
+
+auto br0:1
+iface br0:1 inet static
+      address 172.16.0.15/24
