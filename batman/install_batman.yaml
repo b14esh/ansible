@@ -1,5 +1,5 @@
 ---
-- name: Install Zabbix vesrion 6 on server Debian 11
+- name: Install BATMAN
   hosts: all
   become: yes
   vars:
