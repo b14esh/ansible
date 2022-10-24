@@ -16,7 +16,7 @@
         - libnl-genl-3-dev 
         - make
         - gcc
-      state: present
+      state: latest
       update_cache: True
       
   - name: Clone git repo batman-adv
