@@ -44,16 +44,25 @@
       name: batman_adv
       state: absent
 
+  - name: Run 'make' batman-adv
+    make:
+      chdir: /opt/batman-adv/
+      target: all
+
   - name: Run 'install' batman-adv
     make:
       chdir: /opt/batman-adv/
+      target: install
+      
+  - name: Run 'make' batctl
+    make:
+      chdir: /opt/batctl/
       target: all
 
   - name: Run 'install' batctl
     make:
       chdir: /opt/batctl/
-      target: all
-
+      target: install
 
   - name: Copy file modules to Servers
     copy: src={{ source_file_modules }} dest={{ destin_file_modules }} mode=0644 owner=root group=root backup=no
