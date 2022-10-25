@@ -19,16 +19,20 @@
 
   - name: Copy file wpa_supplicant to Servers
     copy: src={{ source_file_ws }} dest={{ destin_file_ws }} mode=0644 owner=root group=root backup=no
-    notify: RESTART HOSTAPD
+    notify: RESTART WPA_SUPPLICANT
 
   - name: Copy file interfaces to Servers
     copy: src={{ source_file_i }} dest={{ destin_file_i }} mode=0644 owner=root group=root backup=no
-    notify: RESTART HOSTAPD
+    notify: RESTART WPA_SUPPLICANT
 
   handlers:
-    - name: RESTART HOSTAPD
+    - name: RESTART WPA_SUPPLICANT
       shell: rfkill unblock wlan
-    - name: RESTART HOSTAPD
+    - name: RESTART WPA_SUPPLICANT
       shell: rfkill unblock all
-    - name: RESTART HOSTAPD
-      shell: systemctl restart networking
+    - name: RESTART WPA_SUPPLICANT
+      shell: systemctl restart networking 
+    - name: RESTART WPA_SUPPLICANT
+      shell: systemctl enable wpa_supplicant
+    - name: RESTART WPA_SUPPLICANT
+      shell: reboot      

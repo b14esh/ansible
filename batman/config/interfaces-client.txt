@@ -11,7 +11,7 @@ iface eth0 inet dhcp
 auto wlan0 
 iface wlan0 inet static
             address 10.72.0.2/24
-            wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+            #wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
 
 #auto wlan0
 #iface wlan0 inet manual
