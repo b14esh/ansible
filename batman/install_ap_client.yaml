@@ -27,12 +27,9 @@
 
   handlers:
     - name: RESTART WPA_SUPPLICANT
-      shell: rfkill unblock wlan
-    - name: RESTART WPA_SUPPLICANT
-      shell: rfkill unblock all
-    - name: RESTART WPA_SUPPLICANT
-      shell: systemctl restart networking 
-    - name: RESTART WPA_SUPPLICANT
-      shell: systemctl enable wpa_supplicant
-    - name: RESTART WPA_SUPPLICANT
-      shell: reboot      
+      shell: |
+        rfkill unblock wlan
+        rfkill unblock all
+        systemctl restart networking 
+        systemctl enable wpa_supplicant
+        reboot      
