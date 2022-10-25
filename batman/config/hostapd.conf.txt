@@ -9,5 +9,5 @@ auth_algs=1
 wpa=2
 wpa_key_mgmt=WPA-PSK
 rsn_pairwise=CCMP
-ssid=NAME_AP
-wpa_passphrase=YOU_PASSWORD
+ssid="TESTAP"
+wpa_passphrase="APPPTESTPASS"

@@ -1,0 +1,30 @@
+---
+- name: Install AP
+  hosts: all
+  become: yes
+  vars:
+    source_file_dh: ./config/hostapd_default.txt
+    destin_file_dh: /etc/default/hostapd
+    source_file_ch: ./config/hostapd.txt
+    destin_file_ch: /etc/hostapd/hostapd.conf
+    
+  tasks:
+  - name: Install a list of packages
+    apt:
+      pkg:
+        - hostapd
+        - wpasupplicant
+      state: latest
+      update_cache: True
+
+  - name: Copy file hostapd_default to Servers
+    copy: src={{ source_file_dh }} dest={{ destin_file_dh }} mode=0644 owner=root group=root backup=no
+    notify: RESTART HOSTAPD
+
+  - name: Copy file hostapd.conf to Servers
+    copy: src={{ source_file_ch }} dest={{ destin_file_ch }} mode=0644 owner=root group=root backup=no
+    notify: RESTART HOSTAPD
+
+  handlers:
+    - name: SYS REBOOT
+      shell: reboot

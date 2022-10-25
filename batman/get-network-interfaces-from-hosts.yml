@@ -1,0 +1,48 @@
+---
+- name: Save custom files
+  hosts: all
+  become: yes
+  gather_facts: true
+  vars:
+       #source_file_bconf: ./serverbackup.conf.j2
+       #destin_file_bconf: /etc/serverbackup.conf
+
+  tasks:
+  - name: Install "rsync from repository" package
+    apt:
+     name: rsync
+     update_cache: yes
+     cache_valid_time: 3600
+     state: latest
+     
+  - name: Show facts available on the system
+    debug:
+       var: ansible_nodename
+ 
+  - name: rsync file to backup/honeypot for NEED-SERVER
+    synchronize:  src={{ item }} dest="backup/{{ ansible_nodename }}" mode=pull
+    with_items:
+     - "/etc/iptables"
+     - "/tmp/dynamic"
+    when: ansible_nodename == "NEED-SERVER"
+
+
+  - name: rsync file to backup/other
+    synchronize:  src={{ item }} dest="backup/{{ ansible_nodename }}" mode=pull
+    with_items:
+     - "/etc/network"
+    when: ansible_nodename != "NEED-SERVER"
+
+
+#  - name: Save iptables to file local 
+#    shell: iptables-save > /tmp/iptables-save.txt
+
+#  - name: Copy file to local
+#    fetch: src=/tmp/iptables-save.txt dest="backup/{{ ansible_nodename }}/iptables-save.txt"  flat=yes
+
+
+#  - name: Save ipset to file 
+#    shell: ipset list > /tmp/ipset_list_all.txt
+
+#  - name: Copy file to local
+#    fetch: src=/tmp/ipset_list_all.txt dest="backup/{{ ansible_nodename }}/ipset_list_all.txt"  flat=yes

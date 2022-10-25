@@ -1,4 +1,4 @@
-#генерируем пароль 
+﻿#генерируем пароль 
 #wpa_passphrase ИМЯ_ТОЧКИ_ДОСТУПА ПАРОЛЬ
 
 country=RU
@@ -7,6 +7,7 @@ ap_scan=1
 
 update_config=1
 network={
-        ssid="mesh"
-        psk=a35abc15e3ff6d1d1c5c2f7dbc3f158971c09e1b42d78425452a16acb356f5a7
+        ssid="TESTAP"
+        #psk="APPPTESTPASS"
+        psk=5d3c2a8eec933ea7adc629772b66148bad603a3fdad77854ee6cb0fcd0f1dd42
 }
