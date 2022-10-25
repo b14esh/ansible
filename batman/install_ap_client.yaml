@@ -4,7 +4,7 @@
   become: yes
   vars:
     source_file_ws: ./config/wpa_supplicant.conf.txt
-    destin_file_ws: /etc/wpa_supplicant.conf
+    destin_file_ws: /etc/wpa_supplicant/wpa_supplicant.conf
     source_file_i: ./config/interfaces-client.txt
     destin_file_i: /etc/network/interfaces
     
