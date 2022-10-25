@@ -1,0 +1,33 @@
+---
+- name: Install AP clients
+  hosts: all
+  become: yes
+  vars:
+    source_file_ws: ./config/wpa_supplicant.conf.txt
+    destin_file_ws: /etc/wpa_supplicant.conf
+    source_file_i: ./config/interfaces-client.txt
+    destin_file_i: /etc/network/interfaces
+    
+  tasks:
+  - name: Install a list of packages
+    apt:
+      pkg:
+        - hostapd
+        - wpasupplicant
+      state: latest
+      update_cache: True
+
+  - name: Copy file wpa_supplicant to Servers
+    copy: src={{ source_file_ws }} dest={{ destin_file_ws }} mode=0644 owner=root group=root backup=no
+    notify: RESTART HOSTAPD
+
+  - name: Copy file interfaces to Servers
+    copy: src={{ source_file_i }} dest={{ destin_file_i }} mode=0644 owner=root group=root backup=no
+    notify: RESTART HOSTAPD
+
+  handlers:
+    - name: RESTART HOSTAPD
+      shell: |
+        rfkill unblock wlan
+        rfkill unblock all
+        systemctl restart networking

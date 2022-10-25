@@ -27,4 +27,8 @@
 
   handlers:
     - name: RESTART HOSTAPD
-      shell: systemctl restart  hostapd.service
+      shell: |
+        rfkill unblock wlan
+        rfkill unblock all
+        systemctl restart  hostapd.service
+        systemctl enable   hostapd.service 
