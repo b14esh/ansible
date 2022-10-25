@@ -27,7 +27,8 @@
 
   handlers:
     - name: RESTART HOSTAPD
-      shell: |
-        rfkill unblock wlan
-        rfkill unblock all
-        systemctl restart networking
+      shell: rfkill unblock wlan
+    - name: RESTART HOSTAPD
+      shell: rfkill unblock all
+    - name: RESTART HOSTAPD
+      shell: systemctl restart networking
