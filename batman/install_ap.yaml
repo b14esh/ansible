@@ -5,7 +5,7 @@
   vars:
     source_file_dh: ./config/hostapd_default.txt
     destin_file_dh: /etc/default/hostapd
-    source_file_ch: ./config/hostapd.txt
+    source_file_ch: ./config/hostapd.conf.txt
     destin_file_ch: /etc/hostapd/hostapd.conf
     
   tasks:
