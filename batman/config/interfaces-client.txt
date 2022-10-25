@@ -24,7 +24,7 @@ iface wlan0 inet static
 
 #auto bat0
 #iface bat0 inet manual
-      mtu 1468
+#      mtu 1468
 
 #auto br0
 #iface br0 inet manual
