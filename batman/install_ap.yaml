@@ -26,5 +26,5 @@
     notify: RESTART HOSTAPD
 
   handlers:
-    - name: SYS REBOOT
-      shell: reboot
+    - name: RESTART HOSTAPD
+      shell: systemctl restart  hostapd.service
