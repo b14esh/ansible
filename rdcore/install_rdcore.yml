@@ -66,7 +66,7 @@
 
   - name: Create a symbolic link rd
     ansible.builtin.file:
-      src: /var/www//rdcore/rd
+      src: /var/www/rdcore/rd
       dest: /var/www/html/rd
       owner: www-data
       group: www-data
@@ -75,7 +75,7 @@
 
   - name: Create a symbolic link cake4
     ansible.builtin.file:
-      src: /var/www//rdcore/cake4
+      src: /var/www/rdcore/cake4
       dest: /var/www/html/cake4
       owner: www-data
       group: www-data
@@ -83,7 +83,7 @@
 
   - name: Create a symbolic link login
     ansible.builtin.file:
-      src: /var/www//rdcore/login
+      src: /var/www/rdcore/login
       dest: /var/www/html/login
       owner: www-data
       group: www-data
@@ -91,7 +91,7 @@
 
   - name: Create a symbolic link conf_dev
     ansible.builtin.file:
-      src: /var/www//rdcore/AmpConf/build/production/AmpConf
+      src: /var/www/rdcore/AmpConf/build/production/AmpConf
       dest: /var/www/html/conf_dev
       owner: www-data
       group: www-data
@@ -99,7 +99,7 @@
 
   - name: Create a symbolic link AmpConf
     ansible.builtin.file:
-      src: /var/www//rdcore/login/rd_client/build/production/AmpConf
+      src: /var/www/rdcore/login/rd_client/build/production/AmpConf
       dest: /var/www/html/usage
       owner: www-data
       group: www-data
@@ -107,7 +107,7 @@
 
   - name: Create a symbolic link reporting
     ansible.builtin.file:
-      src: /var/www//rdcore/cake4/rd_cake/setup/scripts/reporting
+      src: /var/www/rdcore/cake4/rd_cake/setup/scripts/reporting
       dest: /var/www/html/reporting
       owner: www-data
       group: www-data
