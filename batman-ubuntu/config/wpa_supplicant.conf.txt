@@ -1,0 +1,13 @@
+#генерируем пароль 
+#wpa_passphrase ИМЯ_ТОЧКИ_ДОСТУПА ПАРОЛЬ
+
+country=US
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+
+network={
+        ssid="TESTAP"
+        #psk="APPPTESTPASS"
+        psk=5d3c2a8eec933ea7adc629772b66148bad603a3fdad77854ee6cb0fcd0f1dd42
+        key_mgmt=WPA-PSK
+}

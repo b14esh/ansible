@@ -1,0 +1,73 @@
+---
+- name: Install BATMAN ubuntu
+  hosts: all
+  become: yes
+  vars:
+    source_file_modules: ./config/modules.txt
+    destin_file_modules: /etc/modules
+  
+  tasks:
+  - name: Install a list of packages
+    apt:
+      pkg:
+        - linux-headers-generic
+        - git
+        - libnl-3-dev
+        - libnl-genl-3-dev 
+        - make
+        - gcc
+      state: latest
+      update_cache: True
+      
+  - name: Clone git repo batman-adv
+    git:
+      repo: 'https://github.com/open-mesh-mirror/batman-adv.git'
+      dest: /opt/batman-adv
+      clone: yes
+      force: yes
+      version: v2022.1
+  
+  - name: Clone git repo batctl
+    git:
+      repo: 'https://github.com/open-mesh-mirror/batctl.git'
+      dest: /opt/batctl
+      clone: yes
+      force: yes
+      version: v2022.1
+
+    
+  - name: edit string
+    shell: sed -i '/export/s/=n/=y/' /opt/batman-adv/Makefile  
+
+  - name: Remove the batman_adv module
+    modprobe:
+         name: batman_adv
+         state: absent
+
+  - name: Run 'make' batman-adv
+    make:
+      chdir: /opt/batman-adv/
+      target: all
+
+  - name: Run 'install' batman-adv
+    make:
+      chdir: /opt/batman-adv/
+      target: install
+      
+  - name: Run 'make' batctl
+    make:
+      chdir: /opt/batctl/
+      target: all
+
+  - name: Run 'install' batctl
+    make:
+      chdir: /opt/batctl/
+      target: install
+
+  - name: Copy file modules to Servers
+    copy: src={{ source_file_modules }} dest={{ destin_file_modules }} mode=0644 owner=root group=root backup=no
+    notify: SYS REBOOT
+
+  handlers:
+    - name: SYS REBOOT
+      shell: reboot
