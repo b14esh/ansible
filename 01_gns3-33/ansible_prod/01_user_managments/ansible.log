@@ -1,0 +1,146 @@
+2023-10-04 15:03:07,384 p=3246 u=debian n=ansible | PLAY [all] *********************************************************************************************************************************************************************************************************************************
+2023-10-04 15:03:07,502 p=3246 u=debian n=ansible | TASK [Install "sudo from repository" package] **********************************************************************************************************************************************************************************************
+2023-10-04 15:03:13,775 p=3246 u=debian n=ansible | ok: [localhost]
+2023-10-04 15:03:19,695 p=3246 u=debian n=ansible | [WARNING]: Unhandled error in Python interpreter discovery for host 10.0.0.1: Failed to connect to the host via ssh: ssh: connect to host 10.0.0.1 port 22: Connection timed out
+
+2023-10-04 15:03:19,741 p=3246 u=debian n=ansible | [WARNING]: Unhandled error in Python interpreter discovery for host 10.0.0.2: Failed to connect to the host via ssh: ssh: connect to host 10.0.0.2 port 22: Connection timed out
+
+2023-10-04 15:03:19,764 p=3246 u=debian n=ansible | [WARNING]: Unhandled error in Python interpreter discovery for host 10.0.0.3: Failed to connect to the host via ssh: ssh: connect to host 10.0.0.3 port 22: Connection timed out
+
+2023-10-04 15:03:19,802 p=3246 u=debian n=ansible | [WARNING]: Unhandled error in Python interpreter discovery for host 10.0.0.4: Failed to connect to the host via ssh: ssh: connect to host 10.0.0.4 port 22: Connection timed out
+
+2023-10-04 15:03:19,854 p=3246 u=debian n=ansible | [WARNING]: Unhandled error in Python interpreter discovery for host 10.0.0.5: Failed to connect to the host via ssh: ssh: connect to host 10.0.0.5 port 22: Connection timed out
+
+2023-10-04 15:03:19,858 p=3246 u=debian n=ansible | [WARNING]: Unhandled error in Python interpreter discovery for host 10.0.0.8: Failed to connect to the host via ssh: ssh: connect to host 10.0.0.8 port 22: Connection timed out
+
+2023-10-04 15:03:19,865 p=3246 u=debian n=ansible | [WARNING]: Unhandled error in Python interpreter discovery for host 10.0.0.9: Failed to connect to the host via ssh: ssh: connect to host 10.0.0.9 port 22: Connection timed out
+
+2023-10-04 15:03:19,866 p=3246 u=debian n=ansible | [WARNING]: Unhandled error in Python interpreter discovery for host 10.0.0.6: Failed to connect to the host via ssh: ssh: connect to host 10.0.0.6 port 22: Connection timed out
+
+2023-10-04 15:03:19,869 p=3246 u=debian n=ansible | [WARNING]: Unhandled error in Python interpreter discovery for host 10.0.0.7: Failed to connect to the host via ssh: ssh: connect to host 10.0.0.7 port 22: Connection timed out
+
+2023-10-04 15:03:23,840 p=3246 u=debian n=ansible | [WARNING]: Unhandled error in Python interpreter discovery for host 10.0.0.10: Failed to connect to the host via ssh: ssh: connect to host 10.0.0.10 port 22: Connection timed out
+
+2023-10-04 15:03:29,778 p=3246 u=debian n=ansible | fatal: [10.0.0.1]: UNREACHABLE! => {"changed": false, "msg": "Data could not be sent to remote host \"10.0.0.1\". Make sure this host can be reached over ssh: ssh: connect to host 10.0.0.1 port 22: Connection timed out\r\n", "unreachable": true}
+2023-10-04 15:03:29,844 p=3246 u=debian n=ansible | fatal: [10.0.0.2]: UNREACHABLE! => {"changed": false, "msg": "Data could not be sent to remote host \"10.0.0.2\". Make sure this host can be reached over ssh: ssh: connect to host 10.0.0.2 port 22: Connection timed out\r\n", "unreachable": true}
+2023-10-04 15:03:29,847 p=3246 u=debian n=ansible | fatal: [10.0.0.3]: UNREACHABLE! => {"changed": false, "msg": "Data could not be sent to remote host \"10.0.0.3\". Make sure this host can be reached over ssh: ssh: connect to host 10.0.0.3 port 22: Connection timed out\r\n", "unreachable": true}
+2023-10-04 15:03:29,897 p=3246 u=debian n=ansible | fatal: [10.0.0.4]: UNREACHABLE! => {"changed": false, "msg": "Data could not be sent to remote host \"10.0.0.4\". Make sure this host can be reached over ssh: ssh: connect to host 10.0.0.4 port 22: Connection timed out\r\n", "unreachable": true}
+2023-10-04 15:03:29,934 p=3246 u=debian n=ansible | fatal: [10.0.0.5]: UNREACHABLE! => {"changed": false, "msg": "Data could not be sent to remote host \"10.0.0.5\". Make sure this host can be reached over ssh: ssh: connect to host 10.0.0.5 port 22: Connection timed out\r\n", "unreachable": true}
+2023-10-04 15:03:29,970 p=3246 u=debian n=ansible | fatal: [10.0.0.7]: UNREACHABLE! => {"changed": false, "msg": "Data could not be sent to remote host \"10.0.0.7\". Make sure this host can be reached over ssh: ssh: connect to host 10.0.0.7 port 22: Connection timed out\r\n", "unreachable": true}
+2023-10-04 15:03:29,970 p=3246 u=debian n=ansible | fatal: [10.0.0.9]: UNREACHABLE! => {"changed": false, "msg": "Data could not be sent to remote host \"10.0.0.9\". Make sure this host can be reached over ssh: ssh: connect to host 10.0.0.9 port 22: Connection timed out\r\n", "unreachable": true}
+2023-10-04 15:03:29,974 p=3246 u=debian n=ansible | fatal: [10.0.0.8]: UNREACHABLE! => {"changed": false, "msg": "Data could not be sent to remote host \"10.0.0.8\". Make sure this host can be reached over ssh: ssh: connect to host 10.0.0.8 port 22: Connection timed out\r\n", "unreachable": true}
+2023-10-04 15:03:29,977 p=3246 u=debian n=ansible | fatal: [10.0.0.6]: UNREACHABLE! => {"changed": false, "msg": "Data could not be sent to remote host \"10.0.0.6\". Make sure this host can be reached over ssh: ssh: connect to host 10.0.0.6 port 22: Connection timed out\r\n", "unreachable": true}
+2023-10-04 15:03:33,878 p=3246 u=debian n=ansible | fatal: [10.0.0.10]: UNREACHABLE! => {"changed": false, "msg": "Data could not be sent to remote host \"10.0.0.10\". Make sure this host can be reached over ssh: ssh: connect to host 10.0.0.10 port 22: Connection timed out\r\n", "unreachable": true}
+2023-10-04 15:03:39,871 p=3246 u=debian n=ansible | [WARNING]: Unhandled error in Python interpreter discovery for host 10.0.0.254: Failed to connect to the host via ssh: ssh: connect to host 10.0.0.254 port 22: Connection timed out
+
+2023-10-04 15:03:39,899 p=3246 u=debian n=ansible | [WARNING]: Unhandled error in Python interpreter discovery for host 10.0.0.11: Failed to connect to the host via ssh: ssh: connect to host 10.0.0.11 port 22: Connection timed out
+
+2023-10-04 15:03:49,900 p=3246 u=debian n=ansible | fatal: [10.0.0.254]: UNREACHABLE! => {"changed": false, "msg": "Data could not be sent to remote host \"10.0.0.254\". Make sure this host can be reached over ssh: ssh: connect to host 10.0.0.254 port 22: Connection timed out\r\n", "unreachable": true}
+2023-10-04 15:03:49,930 p=3246 u=debian n=ansible | fatal: [10.0.0.11]: UNREACHABLE! => {"changed": false, "msg": "Data could not be sent to remote host \"10.0.0.11\". Make sure this host can be reached over ssh: ssh: connect to host 10.0.0.11 port 22: Connection timed out\r\n", "unreachable": true}
+2023-10-04 15:03:49,941 p=3246 u=debian n=ansible | TASK [Add a group called cto] **************************************************************************************************************************************************************************************************************
+2023-10-04 15:03:50,715 p=3246 u=debian n=ansible | changed: [localhost]
+2023-10-04 15:03:50,728 p=3246 u=debian n=ansible | TASK [Add a group called linuxadm] *********************************************************************************************************************************************************************************************************
+2023-10-04 15:03:51,183 p=3246 u=debian n=ansible | changed: [localhost]
+2023-10-04 15:03:51,190 p=3246 u=debian n=ansible | TASK [Add a group called voip] *************************************************************************************************************************************************************************************************************
+2023-10-04 15:03:51,623 p=3246 u=debian n=ansible | changed: [localhost]
+2023-10-04 15:03:51,630 p=3246 u=debian n=ansible | TASK [Add user ansible to remote hosts] ****************************************************************************************************************************************************************************************************
+2023-10-04 15:03:52,563 p=3246 u=debian n=ansible | changed: [localhost]
+2023-10-04 15:03:52,572 p=3246 u=debian n=ansible | TASK [Add SSH keys ansibble to remote hosts] ***********************************************************************************************************************************************************************************************
+2023-10-04 15:03:53,303 p=3246 u=debian n=ansible | changed: [localhost]
+2023-10-04 15:03:53,312 p=3246 u=debian n=ansible | TASK [Add user admin to remote hosts] ******************************************************************************************************************************************************************************************************
+2023-10-04 15:03:53,942 p=3246 u=debian n=ansible | changed: [localhost]
+2023-10-04 15:03:53,948 p=3246 u=debian n=ansible | TASK [Add SSH keys ansible to remote hosts] ************************************************************************************************************************************************************************************************
+2023-10-04 15:03:54,426 p=3246 u=debian n=ansible | changed: [localhost]
+2023-10-04 15:03:54,433 p=3246 u=debian n=ansible | TASK [Copy file sudoers to Servers] ********************************************************************************************************************************************************************************************************
+2023-10-04 15:03:55,553 p=3246 u=debian n=ansible | changed: [localhost]
+2023-10-04 15:03:55,564 p=3246 u=debian n=ansible | TASK [Copy file cto to Servers] ************************************************************************************************************************************************************************************************************
+2023-10-04 15:03:56,198 p=3246 u=debian n=ansible | changed: [localhost]
+2023-10-04 15:03:56,206 p=3246 u=debian n=ansible | TASK [Copy file linuxadm to Servers] *******************************************************************************************************************************************************************************************************
+2023-10-04 15:03:56,849 p=3246 u=debian n=ansible | changed: [localhost]
+2023-10-04 15:03:56,868 p=3246 u=debian n=ansible | PLAY RECAP *********************************************************************************************************************************************************************************************************************************
+2023-10-04 15:03:56,868 p=3246 u=debian n=ansible | 10.0.0.1                   : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-04 15:03:56,869 p=3246 u=debian n=ansible | 10.0.0.10                  : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-04 15:03:56,870 p=3246 u=debian n=ansible | 10.0.0.11                  : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-04 15:03:56,870 p=3246 u=debian n=ansible | 10.0.0.2                   : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-04 15:03:56,871 p=3246 u=debian n=ansible | 10.0.0.254                 : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-04 15:03:56,871 p=3246 u=debian n=ansible | 10.0.0.3                   : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-04 15:03:56,872 p=3246 u=debian n=ansible | 10.0.0.4                   : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-04 15:03:56,873 p=3246 u=debian n=ansible | 10.0.0.5                   : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-04 15:03:56,873 p=3246 u=debian n=ansible | 10.0.0.6                   : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-04 15:03:56,874 p=3246 u=debian n=ansible | 10.0.0.7                   : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-04 15:03:56,874 p=3246 u=debian n=ansible | 10.0.0.8                   : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-04 15:03:56,875 p=3246 u=debian n=ansible | 10.0.0.9                   : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-04 15:03:56,875 p=3246 u=debian n=ansible | localhost                  : ok=11   changed=10   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-05 13:46:03,041 p=3897 u=debian n=ansible | PLAY [all] ************************************************************************************************************************************************
+2023-10-05 13:46:03,093 p=3897 u=debian n=ansible | TASK [Install "sudo from repository" package] *************************************************************************************************************
+2023-10-05 13:46:08,257 p=3897 u=debian n=ansible | ok: [10.0.0.6]
+2023-10-05 13:46:08,932 p=3897 u=debian n=ansible | ok: [10.0.0.2]
+2023-10-05 13:46:09,524 p=3897 u=debian n=ansible | ok: [10.0.0.3]
+2023-10-05 13:46:09,636 p=3897 u=debian n=ansible | ok: [10.0.0.4]
+2023-10-05 13:46:09,697 p=3897 u=debian n=ansible | ok: [localhost]
+2023-10-05 13:46:09,708 p=3897 u=debian n=ansible | TASK [Add a group called cto] *****************************************************************************************************************************
+2023-10-05 13:46:10,576 p=3897 u=debian n=ansible | ok: [localhost]
+2023-10-05 13:46:10,690 p=3897 u=debian n=ansible | changed: [10.0.0.3]
+2023-10-05 13:46:10,718 p=3897 u=debian n=ansible | changed: [10.0.0.2]
+2023-10-05 13:46:10,718 p=3897 u=debian n=ansible | changed: [10.0.0.6]
+2023-10-05 13:46:10,722 p=3897 u=debian n=ansible | changed: [10.0.0.4]
+2023-10-05 13:46:10,729 p=3897 u=debian n=ansible | TASK [Add a group called linuxadm] ************************************************************************************************************************
+2023-10-05 13:46:11,320 p=3897 u=debian n=ansible | changed: [10.0.0.2]
+2023-10-05 13:46:11,336 p=3897 u=debian n=ansible | ok: [localhost]
+2023-10-05 13:46:11,375 p=3897 u=debian n=ansible | changed: [10.0.0.6]
+2023-10-05 13:46:11,410 p=3897 u=debian n=ansible | changed: [10.0.0.4]
+2023-10-05 13:46:11,447 p=3897 u=debian n=ansible | changed: [10.0.0.3]
+2023-10-05 13:46:11,457 p=3897 u=debian n=ansible | TASK [Add a group called voip] ****************************************************************************************************************************
+2023-10-05 13:46:12,027 p=3897 u=debian n=ansible | changed: [10.0.0.2]
+2023-10-05 13:46:12,037 p=3897 u=debian n=ansible | ok: [localhost]
+2023-10-05 13:46:12,049 p=3897 u=debian n=ansible | changed: [10.0.0.6]
+2023-10-05 13:46:12,110 p=3897 u=debian n=ansible | changed: [10.0.0.4]
+2023-10-05 13:46:12,138 p=3897 u=debian n=ansible | changed: [10.0.0.3]
+2023-10-05 13:46:12,148 p=3897 u=debian n=ansible | TASK [Add user ansible to remote hosts] *******************************************************************************************************************
+2023-10-05 13:46:13,092 p=3897 u=debian n=ansible | ok: [localhost]
+2023-10-05 13:46:13,552 p=3897 u=debian n=ansible | changed: [10.0.0.4]
+2023-10-05 13:46:13,567 p=3897 u=debian n=ansible | changed: [10.0.0.6]
+2023-10-05 13:46:13,570 p=3897 u=debian n=ansible | changed: [10.0.0.2]
+2023-10-05 13:46:13,574 p=3897 u=debian n=ansible | changed: [10.0.0.3]
+2023-10-05 13:46:13,580 p=3897 u=debian n=ansible | TASK [Add SSH keys ansibble to remote hosts] **************************************************************************************************************
+2023-10-05 13:46:14,563 p=3897 u=debian n=ansible | changed: [10.0.0.3]
+2023-10-05 13:46:14,588 p=3897 u=debian n=ansible | changed: [10.0.0.6]
+2023-10-05 13:46:14,604 p=3897 u=debian n=ansible | changed: [10.0.0.2]
+2023-10-05 13:46:14,635 p=3897 u=debian n=ansible | changed: [10.0.0.4]
+2023-10-05 13:46:14,699 p=3897 u=debian n=ansible | ok: [localhost]
+2023-10-05 13:46:14,710 p=3897 u=debian n=ansible | TASK [Add user admin to remote hosts] *********************************************************************************************************************
+2023-10-05 13:46:15,408 p=3897 u=debian n=ansible | ok: [localhost]
+2023-10-05 13:46:15,654 p=3897 u=debian n=ansible | changed: [10.0.0.2]
+2023-10-05 13:46:15,864 p=3897 u=debian n=ansible | changed: [10.0.0.6]
+2023-10-05 13:46:15,864 p=3897 u=debian n=ansible | changed: [10.0.0.4]
+2023-10-05 13:46:15,872 p=3897 u=debian n=ansible | changed: [10.0.0.3]
+2023-10-05 13:46:15,878 p=3897 u=debian n=ansible | TASK [Add SSH keys ansible to remote hosts] ***************************************************************************************************************
+2023-10-05 13:46:16,547 p=3897 u=debian n=ansible | changed: [10.0.0.2]
+2023-10-05 13:46:16,617 p=3897 u=debian n=ansible | changed: [10.0.0.6]
+2023-10-05 13:46:16,629 p=3897 u=debian n=ansible | changed: [10.0.0.4]
+2023-10-05 13:46:16,644 p=3897 u=debian n=ansible | changed: [10.0.0.3]
+2023-10-05 13:46:16,718 p=3897 u=debian n=ansible | ok: [localhost]
+2023-10-05 13:46:16,728 p=3897 u=debian n=ansible | TASK [Copy file sudoers to Servers] ***********************************************************************************************************************
+2023-10-05 13:46:18,377 p=3897 u=debian n=ansible | changed: [10.0.0.2]
+2023-10-05 13:46:18,411 p=3897 u=debian n=ansible | changed: [10.0.0.3]
+2023-10-05 13:46:18,412 p=3897 u=debian n=ansible | changed: [10.0.0.4]
+2023-10-05 13:46:18,744 p=3897 u=debian n=ansible | ok: [localhost]
+2023-10-05 13:46:18,756 p=3897 u=debian n=ansible | changed: [10.0.0.6]
+2023-10-05 13:46:18,766 p=3897 u=debian n=ansible | TASK [Copy file cto to Servers] ***************************************************************************************************************************
+2023-10-05 13:46:19,787 p=3897 u=debian n=ansible | changed: [10.0.0.2]
+2023-10-05 13:46:19,992 p=3897 u=debian n=ansible | changed: [10.0.0.4]
+2023-10-05 13:46:20,009 p=3897 u=debian n=ansible | changed: [10.0.0.6]
+2023-10-05 13:46:20,049 p=3897 u=debian n=ansible | changed: [10.0.0.3]
+2023-10-05 13:46:20,210 p=3897 u=debian n=ansible | ok: [localhost]
+2023-10-05 13:46:20,219 p=3897 u=debian n=ansible | TASK [Copy file linuxadm to Servers] **********************************************************************************************************************
+2023-10-05 13:46:21,280 p=3897 u=debian n=ansible | changed: [10.0.0.2]
+2023-10-05 13:46:21,472 p=3897 u=debian n=ansible | changed: [10.0.0.6]
+2023-10-05 13:46:21,488 p=3897 u=debian n=ansible | changed: [10.0.0.4]
+2023-10-05 13:46:21,529 p=3897 u=debian n=ansible | changed: [10.0.0.3]
+2023-10-05 13:46:21,681 p=3897 u=debian n=ansible | ok: [localhost]
+2023-10-05 13:46:21,755 p=3897 u=debian n=ansible | PLAY RECAP ************************************************************************************************************************************************
+2023-10-05 13:46:21,756 p=3897 u=debian n=ansible | 10.0.0.2                   : ok=11   changed=10   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-05 13:46:21,756 p=3897 u=debian n=ansible | 10.0.0.3                   : ok=11   changed=10   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-05 13:46:21,757 p=3897 u=debian n=ansible | 10.0.0.4                   : ok=11   changed=10   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-05 13:46:21,757 p=3897 u=debian n=ansible | 10.0.0.6                   : ok=11   changed=10   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-05 13:46:21,758 p=3897 u=debian n=ansible | localhost                  : ok=11   changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   

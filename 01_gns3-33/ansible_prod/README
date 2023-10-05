@@ -1,0 +1,17 @@
+Немного ручек
+
+cat >  /etc/systemd/network/00_ens4.network << "EOF"
+
+[Match]
+Name=ens4
+[Network]
+DHCP=ipv4
+Address=10.0.0.88/24
+
+EOF
+
+
+b2
+x=2
+hostnamectl set-hostname b${x}.board.inc
+sed -i 's/10\.0\.0\.88/10\.0\.0\.'${x}'/g' /etc/systemd/network/00_ens4.network

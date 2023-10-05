@@ -1,0 +1,26 @@
+---
+- hosts: voipuser
+  become: yes
+  vars:
+       source_file_cto: ./config/voipuser
+       destin_file_cto: /etc/sudoers.d/voipuser
+  
+  tasks:
+  - name: Cheack and Print Linux Version
+    debug: var=ansible_os_family
+
+  - name: Add a group called voip
+    group:
+      name: voip
+      state: present  
+
+  - name: Add user to remote hosts # for test password voipuser:voipuser
+    user: name=voipuser groups=sudo,voip shell=/bin/bash password=$y$j9T$sHBfwsHHtZxwGt4.TeZPe.$AcjFTJWh/xXHGWZfEuox9pLRHe5U/5H9uSxbz.2Hq99
+    when: ansible_os_family == "Debian"
+ 
+#  - name: Add user to remote hosts
+#    user: name=voipuser groups=wheel shell=/bin/bash password=$y$j9T$sHBfwsHHtZxwGt4.TeZPe.$AcjFTJWh/xXHGWZfEuox9pLRHe5U/5H9uSxbz.2Hq99
+#    when: ansible_os_family == "RedHat"
+ 
+  - name: Add SSH keys to remote hosts
+    authorized_key: user=voipuser key="{{ lookup('file', "./config/voipuserk/id_rsa.pub") }}"
