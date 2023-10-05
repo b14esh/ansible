@@ -173,3 +173,40 @@
 2023-10-05 14:50:37,863 p=6613 u=debian n=ansible | 10.0.0.3                   : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 2023-10-05 14:50:37,863 p=6613 u=debian n=ansible | 10.0.0.4                   : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 2023-10-05 14:50:37,864 p=6613 u=debian n=ansible | 10.0.0.6                   : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-05 15:23:10,345 p=6906 u=debian n=ansible | PLAY [on or off dhcp for ens5] ****************************************************************************************************************************
+2023-10-05 15:23:10,363 p=6906 u=debian n=ansible | TASK [Gathering Facts] ************************************************************************************************************************************
+2023-10-05 15:23:14,402 p=6906 u=debian n=ansible | ok: [10.0.0.2]
+2023-10-05 15:23:14,414 p=6906 u=debian n=ansible | ok: [10.0.0.3]
+2023-10-05 15:23:14,457 p=6906 u=debian n=ansible | ok: [10.0.0.6]
+2023-10-05 15:23:14,534 p=6906 u=debian n=ansible | ok: [10.0.0.4]
+2023-10-05 15:23:14,644 p=6906 u=debian n=ansible | TASK [Edit file systemd-network ens5] *********************************************************************************************************************
+2023-10-05 15:23:16,382 p=6906 u=debian n=ansible | ok: [10.0.0.3]
+2023-10-05 15:23:16,404 p=6906 u=debian n=ansible | ok: [10.0.0.2]
+2023-10-05 15:23:16,409 p=6906 u=debian n=ansible | ok: [10.0.0.6]
+2023-10-05 15:23:16,412 p=6906 u=debian n=ansible | ok: [10.0.0.4]
+2023-10-05 15:23:16,534 p=6906 u=debian n=ansible | PLAY RECAP ************************************************************************************************************************************************
+2023-10-05 15:23:16,535 p=6906 u=debian n=ansible | 10.0.0.2                   : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-05 15:23:16,535 p=6906 u=debian n=ansible | 10.0.0.3                   : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-05 15:23:16,536 p=6906 u=debian n=ansible | 10.0.0.4                   : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-05 15:23:16,536 p=6906 u=debian n=ansible | 10.0.0.6                   : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-05 15:33:40,263 p=7261 u=debian n=ansible | PLAY [on or off dhcp for ens5] ****************************************************************************************************************************
+2023-10-05 15:33:40,284 p=7261 u=debian n=ansible | TASK [Gathering Facts] ************************************************************************************************************************************
+2023-10-05 15:33:43,187 p=7261 u=debian n=ansible | ok: [10.0.0.6]
+2023-10-05 15:33:44,033 p=7261 u=debian n=ansible | ok: [10.0.0.4]
+2023-10-05 15:33:44,525 p=7261 u=debian n=ansible | ok: [10.0.0.3]
+2023-10-05 15:33:44,533 p=7261 u=debian n=ansible | ok: [10.0.0.2]
+2023-10-05 15:33:44,634 p=7261 u=debian n=ansible | TASK [Edit file systemd-network ens5] *********************************************************************************************************************
+2023-10-05 15:33:46,278 p=7261 u=debian n=ansible | changed: [10.0.0.4]
+2023-10-05 15:33:46,295 p=7261 u=debian n=ansible | changed: [10.0.0.6]
+2023-10-05 15:33:46,318 p=7261 u=debian n=ansible | changed: [10.0.0.2]
+2023-10-05 15:33:46,330 p=7261 u=debian n=ansible | changed: [10.0.0.3]
+2023-10-05 15:33:46,400 p=7261 u=debian n=ansible | RUNNING HANDLER [restart system] **************************************************************************************************************************
+2023-10-05 15:33:47,124 p=7261 u=debian n=ansible | changed: [10.0.0.6]
+2023-10-05 15:33:47,144 p=7261 u=debian n=ansible | changed: [10.0.0.3]
+2023-10-05 15:33:47,147 p=7261 u=debian n=ansible | changed: [10.0.0.4]
+2023-10-05 15:33:47,151 p=7261 u=debian n=ansible | changed: [10.0.0.2]
+2023-10-05 15:33:47,214 p=7261 u=debian n=ansible | PLAY RECAP ************************************************************************************************************************************************
+2023-10-05 15:33:47,215 p=7261 u=debian n=ansible | 10.0.0.2                   : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-05 15:33:47,215 p=7261 u=debian n=ansible | 10.0.0.3                   : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-05 15:33:47,216 p=7261 u=debian n=ansible | 10.0.0.4                   : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-05 15:33:47,216 p=7261 u=debian n=ansible | 10.0.0.6                   : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
