@@ -1,0 +1,28 @@
+---
+- name: install ISP
+  hosts: all
+  become: yes
+  
+  tasks:
+  - name: Edit file systemd-network ens5
+    template:
+       src: ./config/00_ens5.network.j2
+       dest: /etc/systemd/network/00_ens5.network
+  
+  - name: Install "bird2 from repository" package
+    apt:
+     name: bird2
+     state: present
+
+  - name: Edit conf file bird
+    template:
+       src: ./config/00_bird.conf.j2
+       dest: /etc/bird/bird.conf
+
+  - name: Create log file for bird
+    ansible.builtin.file:
+      path: /var/log/bird.log
+      state: touch
+      owner: bird
+      group: bird
+      mode: u=rw,g=r,o=r

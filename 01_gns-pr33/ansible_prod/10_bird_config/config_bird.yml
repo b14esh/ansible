@@ -1,0 +1,11 @@
+---
+- name: config_bird
+  hosts: all
+  become: yes
+  
+  tasks:
+  - name: Edit conf file bird
+    template:
+       src: ./config/00_bird.conf.j2
+       dest: /etc/bird/bird.conf
+

@@ -1,0 +1,16 @@
+---
+- name: config_bird
+  hosts: all
+  become: yes
+  
+  tasks:
+  - name: Edit conf file bird
+    template:
+       src: ./config/00_bird.conf.j2
+       dest: /etc/bird/bird.conf
+
+  - name: stop bird
+    service: name=bird state=stopped        
+ 
+  - name: start bird
+    service: name=bird state=restarted         

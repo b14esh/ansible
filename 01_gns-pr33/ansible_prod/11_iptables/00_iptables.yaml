@@ -1,0 +1,15 @@
+---
+- name: Reconfigure iptables
+  hosts: all
+  become: yes
+  
+  tasks:
+  - name: Add config iptables nat
+    template:
+       src: ./config/rules.v4.j2
+       dest: /etc/iptables/rules.v4
+    notify: Restart netfilter-persistent 
+  
+  handlers:
+  - name: Restart netfilter-persistent
+    service: name=netfilter-persistent state=restarted              

@@ -1,0 +1,75 @@
+---
+- name: install ISP
+  hosts: all
+  become: yes
+  
+  tasks:
+  - name: Edit file systemd-network ens5
+    template:
+       src: ./config/00_ens5.network.j2
+       dest: /etc/systemd/network/00_ens5.network
+  
+  - name: Edit file systemd-network ens6
+    template:
+       src: ./config/00_ens6.network.j2
+       dest: /etc/systemd/network/00_ens6.network
+
+  - name: Edit file systemd-network ens7
+    template:
+       src: ./config/00_ens7.network.j2
+       dest: /etc/systemd/network/00_ens7.network
+
+  - name: Edit file systemd-network ens8
+    template:
+       src: ./config/00_ens8.network.j2
+       dest: /etc/systemd/network/00_ens8.network
+
+  - name: Add net.ipv4.ip_forward = 1 
+    ansible.posix.sysctl:
+      name: net.ipv4.ip_forward
+      value: '1'
+      sysctl_set: yes
+      state: present
+      reload: yes
+
+  - name: Install "iptables-persistent from repository" package
+    apt:
+     name: iptables-persistent
+     state: present
+
+  - name: Install "dnsmasq from repository" package
+    apt:
+     name: dnsmasq
+     state: present
+
+  - name: Add config iptables nat
+    template:
+       src: ./config/rules.v4.j2
+       dest: /etc/iptables/rules.v4
+    notify: Restart netfilter-persistent 
+  
+  - name: Add config dnsmasq 
+    template:
+       src: ./config/dnsmasq.conf.j2
+       dest: /etc/dnsmasq.conf
+    notify: Restart dnsmasq
+
+  - name: Stop service systemd-resolved.service
+    ansible.builtin.service:
+      name: systemd-resolved.service
+      state: stopped
+
+  - name: Disabled service systemd-resolved.service
+    ansible.builtin.service:
+      name: systemd-resolved.service
+      enabled: no
+  #bad i'm taid
+  - name: restart system
+    shell: reboot
+  #bad i'm taid
+
+  handlers:
+  - name: Restart netfilter-persistent
+    service: name=netfilter-persistent state=restarted              
+  - name: Restart dnsmasq
+    service: name=dnsmasq state=restarted              

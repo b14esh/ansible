@@ -1,0 +1,23 @@
+[ISP]
+localhost ansible_connection=local
+[ISP:vars]
+ansible_bird_default_route_0="route 0.0.0.0/0 via 192.168.55.1;"
+ansible_bird_default_route_1=""
+ansible_bird_default_route_2=""
+
+[ISP236]
+10.0.0.2
+10.0.0.3
+10.0.0.6
+[ISP236:vars]
+ansible_bird_default_route_0="route 0.0.0.0/0 via 10.100.0.1;"
+ansible_bird_default_route_1=""
+ansible_bird_default_route_2=""
+
+[ISP4]
+10.0.0.4
+[ISP4:vars]
+ansible_bird_default_route_0="#route 0.0.0.0/0 via 10.100.2.1;"
+ansible_bird_default_route_1="#route 0.0.0.0/0 via 10.100.3.1;"
+ansible_bird_default_route_2="#route 0.0.0.0/0 via 10.100.6.1;"
+

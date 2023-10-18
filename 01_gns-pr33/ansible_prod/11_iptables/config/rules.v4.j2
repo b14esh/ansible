@@ -1,0 +1,30 @@
+*filter
+:INPUT DROP [0:0]
+:FORWARD DROP [0:0]
+:OUTPUT ACCEPT [0:0]
+-A INPUT -i lo -j ACCEPT
+{{ a_i_p1 }}
+{{ a_i_p2 }}
+-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+-A INPUT -s 192.168.16.0/24 -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT
+-A INPUT -s 192.168.15.0/24 -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT
+-A INPUT -s 10.0.0.0/24 -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT
+-A INPUT -p icmp -m icmp --icmp-type 8 -m limit --limit 100/sec -j ACCEPT
+-A INPUT -p icmp -m icmp --icmp-type 0 -j ACCEPT
+-A INPUT -p icmp -m icmp --icmp-type 3 -j ACCEPT
+-A INPUT -p icmp -m icmp --icmp-type 4 -j ACCEPT
+-A INPUT -p icmp -m icmp --icmp-type 11 -j ACCEPT
+-A INPUT -p icmp -m icmp --icmp-type 12 -j ACCEPT
+-A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
+{{ a_f_p1 }}
+{{ a_f_p2 }}
+COMMIT
+*nat
+:PREROUTING ACCEPT [0:0]
+:INPUT ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+:POSTROUTING ACCEPT [0:0]
+{{ a_nat_p1 }}
+{{ a_nat_p2 }}
+{{ a_nat_p3 }}
+COMMIT

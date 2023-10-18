@@ -1,0 +1,36 @@
+[ISP]
+localhost ansible_connection=local
+[ISP:vars]
+a_i_p1="-A INPUT -i ens6 -j ACCEPT"
+a_i_p2="-A INPUT -i ens5 -j ACCEPT"
+a_f_p1="-A FORWARD -i ens6 -j ACCEPT"
+a_f_p2="-A FORWARD -i ens5 -j ACCEPT"
+a_nat_p1="-A POSTROUTING -o ens4 -j MASQUERADE"
+a_nat_p2=""
+a_nat_p3=""
+
+[b2-3-6]
+10.0.0.2
+10.0.0.3
+10.0.0.6
+[b2-3-6:vars]
+a_i_p1="-A INPUT -i ens5 -j ACCEPT"
+a_i_p2="-A INPUT -i ens7 -j ACCEPT"
+a_f_p1="-A FORWARD -i ens5 -j ACCEPT"
+a_f_p2="-A FORWARD -i ens7 -j ACCEPT"
+a_nat_p1="-A POSTROUTING -o ens5 -j MASQUERADE"
+a_nat_p2=""
+a_nat_p3=""
+
+[b4]
+10.0.0.4
+[b4:vars]
+a_i_p1=""
+a_i_p2="-A INPUT -i ens8 -j ACCEPT"
+a_f_p1="-A FORWARD -i ens8 -j ACCEPT"
+a_f_p2=""
+a_nat_p1="-A POSTROUTING -o ens5 -j MASQUERADE"
+a_nat_p2="-A POSTROUTING -o ens7 -j MASQUERADE"
+a_nat_p3="-A POSTROUTING -o ens6 -j MASQUERADE"
+
+

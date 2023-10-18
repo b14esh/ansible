@@ -1,0 +1,18 @@
+---
+- name: on or off dhcp for ens5
+  hosts: all
+  become: yes
+  
+  tasks:
+  - name: Edit file systemd-network ens5
+    template:
+       src: ./config/00_ens4.network.j2
+       dest: /etc/systemd/network/00_ens4.network
+    notify: restart system   
+
+  handlers:
+  - name: restart system
+    shell: reboot
+    #service: name=zabbix-agent state=restarted    
+       
+
